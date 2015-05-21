@@ -674,7 +674,8 @@ public class DataImportMainVB implements PreInsertEventListener, PreUpdateEventL
 		Object entity = event.getEntity();
 		if (entity instanceof HpsBaseObject) {
 			HpsBaseObject hpsObject = (HpsBaseObject) entity;
-			hpsObject.setCreateTime(currentDate);
+			hpsObject.setCreateTime(currentDate); 
+			System.out.println();
 			hpsObject.setCreateUsetId(-1l);
 			hpsObject.setCreateUserName("OLD_SYS_VB");
 		}
