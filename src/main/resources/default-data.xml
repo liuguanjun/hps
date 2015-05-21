@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+        <table name="app_user">
+        <column>id</column>
+        <column>username</column>
+        <column>password</column>
+        <column>first_name</column>
+        <column>last_name</column>
+        <column>address</column>
+        <column>city</column>
+        <column>country</column>
+        <column>email</column>
+        <column>phone_number</column>
+        <column>postal_code</column>
+        <column>province</column>
+        <column>website</column>
+        <column>password_hint</column>
+        <column>version</column>
+        <column>account_enabled</column>
+        <column>account_expired</column>
+        <column>account_locked</column>
+        <column>credentials_expired</column>
+        <row>
+            <value description="id">1</value>
+            <value description="username">admin</value>
+            <value description="password">$2a$10$bH/ssqW8OhkTlIso9/yakubYODUOmh.6m5HEJvcBq3t3VdBh7ebqO</value>
+            <value description="first_name">超级管理员</value>
+            <value description="last_name">Raible</value>
+            <value description="address"></value>
+            <value description="city">Denver</value>
+            <value description="country">US</value>
+            <value description="email">matt@raibledesigns.com</value>
+            <value description="phone_number"></value>
+            <value description="postal_code">80210</value>
+            <value description="province">CO</value>
+            <value description="website">http://raibledesigns.com</value>
+            <value description="password_hint"><![CDATA[The same as your username.]]></value>
+            <value description="version">1</value>
+            <value description="account_enabled">1</value>
+            <value description="account_expired">0</value>
+            <value description="account_locked">0</value>
+            <value description="credentials_expired">0</value>
+        </row>
+    </table>
+    <table name="role">
+        <column>id</column>
+        <column>name</column>
+        <column>description</column>
+        <row>
+            <value description="id">1</value>
+            <value description="name">ROLE_ADMIN</value>
+            <value description="description"><![CDATA[Administrator role (can edit Users)]]></value>
+        </row>
+        <row>
+            <value description="id">2</value>
+            <value description="name">ROLE_USER</value>
+            <value description="description"><![CDATA[Default role for all Users]]></value>
+        </row>
+        <row>
+            <value description="id">3</value>
+            <value description="name">ROLE_SUPERADMIN</value>
+            <value description="description"><![CDATA[Default role for all Users]]></value>
+        </row>
+        <row>
+            <value description="id">4</value>
+            <value description="name">ROLE_HOUSEADMIN</value>
+            <value description="description"><![CDATA[Default role for all Users]]></value>
+        </row>
+    </table>
+    <table name="user_role">
+        <column>user_id</column>
+        <column>role_id</column>
+        <row>
+            <value description="user_id">1</value>
+            <value description="role_id">3</value>
+        </row>
+    </table>
+    <table name="hps_user">
+         <column>id</column>
+         <column>sex</column>
+         <column>app_user_id</column>
+         <column>base_id</column>
+         <column>create_user_id</column>
+         <column>create_user_name</column>
+         <column>last_update_user_id</column>
+         <column>last_update_user_name</column>
+         <row>
+              <value description="id">1</value>
+              <value description="sex">0</value>
+              <value description="app_user_id">1</value>
+              <null/>
+              <value description="create_user_id">-1</value>
+	          <value description="create_user_name">SYS</value>
+	          <value description="last_update_user_id">-1</value>
+	          <value description="last_update_user_name">SYS</value>
+          </row>
+    </table>
+        <table name="hps_dict">
+       <column>id</column>
+       <column>code</column>
+       <column>name</column>
+       <column>create_user_id</column>
+       <column>create_user_name</column>
+       <column>last_update_user_id</column>
+       <column>last_update_user_name</column>
+       <row>
+          <value description="id">1</value>
+          <value description="code">SHENFEN_XINGZHI</value>
+          <value description="name">身份性质</value>
+          <value description="create_user_id">1</value>
+          <value description="create_user_name">ADMIN</value>
+          <value description="last_update_user_id">1</value>
+          <value description="last_update_user_name">ADMIN</value>
+       </row>
+       <row>
+          <value description="id">2</value>
+          <value description="code">YONGFANG_XINGZHI</value>
+          <value description="name">房屋性质</value>
+          <value description="create_user_id">1</value>
+          <value description="create_user_name">ADMIN</value>
+          <value description="last_update_user_id">1</value>
+          <value description="last_update_user_name">ADMIN</value>
+       </row>
+       <row>
+          <value description="id">3</value>
+          <value description="code">CHAOBIAO_ZHUANGTAI</value>
+          <value description="name">抄表状态</value>
+          <value description="create_user_id">1</value>
+          <value description="create_user_name">ADMIN</value>
+          <value description="last_update_user_id">1</value>
+          <value description="last_update_user_name">ADMIN</value>
+       </row>
+    </table>
+    
+    <table name="hps_dictitem">
+       <column>id</column>
+       <column>code</column>
+       <column>name</column>
+       <column>dict_id</column>
+       <column>create_user_id</column>
+       <column>create_user_name</column>
+       <column>last_update_user_id</column>
+       <column>last_update_user_name</column>
+       <row>
+          <value description="id">1</value>
+          <value description="code">JUMIN_ZHUFANG</value>
+          <value description="name">居民住房</value>
+          <value description="dict_id">2</value>
+          <value description="create_user_id">-1</value>
+          <value description="create_user_name">SYS</value>
+          <value description="last_update_user_id">-1</value>
+          <value description="last_update_user_name">SYS</value>
+       </row>
+       <row>
+          <value description="id">2</value>
+          <value description="code">SHANGYE_ZHUFANG</value>
+          <value description="name">商业住房</value>
+          <value description="dict_id">2</value>
+          <value description="create_user_id">-1</value>
+          <value description="create_user_name">SYS</value>
+          <value description="last_update_user_id">-1</value>
+          <value description="last_update_user_name">SYS</value>
+       </row>
+       <row>
+          <value description="id">3</value>
+          <value description="code">XUEXIAO</value>
+          <value description="name">学校</value>
+          <value description="dict_id">2</value>
+          <value description="create_user_id">-1</value>
+          <value description="create_user_name">SYS</value>
+          <value description="last_update_user_id">-1</value>
+          <value description="last_update_user_name">SYS</value>
+       </row>
+       <row>
+          <value description="id">4</value>
+          <value description="code">CHEKU</value>
+          <value description="name">车库</value>
+          <value description="dict_id">2</value>
+          <value description="create_user_id">-1</value>
+          <value description="create_user_name">SYS</value>
+          <value description="last_update_user_id">-1</value>
+          <value description="last_update_user_name">SYS</value>
+       </row>
+       <row>
+          <value description="id">5</value>
+          <value description="code">GONGYE</value>
+          <value description="name">工业</value>
+          <value description="dict_id">2</value>
+          <value description="create_user_id">-1</value>
+          <value description="create_user_name">SYS</value>
+          <value description="last_update_user_id">-1</value>
+          <value description="last_update_user_name">SYS</value>
+       </row>
+       <row>
+          <value description="id">6</value>
+          <value description="code">PERSONAL</value>
+          <value description="name">个人</value>
+          <value description="dict_id">2</value>
+          <value description="create_user_id">-1</value>
+          <value description="create_user_name">SYS</value>
+          <value description="last_update_user_id">-1</value>
+          <value description="last_update_user_name">SYS</value>
+       </row>
+       <row>
+          <value description="id">7</value>
+          <value description="code">COMMERCIAL</value>
+          <value description="name">商用</value>
+          <value description="dict_id">2</value>
+          <value description="create_user_id">-1</value>
+          <value description="create_user_name">SYS</value>
+          <value description="last_update_user_id">-1</value>
+          <value description="last_update_user_name">SYS</value>
+       </row>
+       <row>
+          <value description="id">8</value>
+          <value description="code">WEICHAOBIAO</value>
+          <value description="name">未抄表</value>
+          <value description="dict_id">3</value>
+          <value description="create_user_id">-1</value>
+          <value description="create_user_name">SYS</value>
+          <value description="last_update_user_id">-1</value>
+          <value description="last_update_user_name">SYS</value>
+       </row>
+       <row>
+          <value description="id">9</value>
+          <value description="code">YICHAOBIAO</value>
+          <value description="name">已抄表</value>
+          <value description="dict_id">3</value>
+          <value description="create_user_id">-1</value>
+          <value description="create_user_name">SYS</value>
+          <value description="last_update_user_id">-1</value>
+          <value description="last_update_user_name">SYS</value>
+       </row>
+       <row>
+          <value description="id">10</value>
+          <value description="code">YIBAOCUN</value>
+          <value description="name">已保存</value>
+          <value description="dict_id">3</value>
+          <value description="create_user_id">-1</value>
+          <value description="create_user_name">SYS</value>
+          <value description="last_update_user_id">-1</value>
+          <value description="last_update_user_name">SYS</value>
+       </row>
+    </table>
+</dataset>

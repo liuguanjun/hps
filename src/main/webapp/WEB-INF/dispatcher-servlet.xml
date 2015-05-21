@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd"
+       default-lazy-init="true">
+
+    <bean id="exceptionResolver" class="com.my.hps.webapp.exception.HpsSimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="org.springframework.dao.DataAccessException">
+                    dataAccessFailure
+                </prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="2097152"/>
+    </bean>
+
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="ApplicationResources"/>
+        <property name="useCodeAsDefaultMessage" value="true"/>
+    </bean> 
+
+    <context:component-scan base-package="com.my.hps.webapp"/>
+
+    <!-- Configures the @Controller programming model -->
+    <mvc:annotation-driven/>
+
+    <!-- Convenient way to map URLs to JSPs w/o having a Controller -->
+    <mvc:view-controller path="/admin/activeUsers" view-name="admin/activeUsers"/>
+    <mvc:view-controller path="/admin/UserManagement" view-name="admin/UserManagement"/>
+    <mvc:view-controller path="/admin/basedata/BaseManagement" view-name="admin/basedata/BaseManagement"/>
+    <mvc:view-controller path="/admin/basedata/LouzuoManagement" view-name="admin/basedata/LouzuoManagement"/>
+    <mvc:view-controller path="/admin/basedata/FangwuZongheChaxun" view-name="admin/basedata/FangwuZongheChaxun"/>
+    <mvc:view-controller path="/admin/basedata/ElectricUnitManagement" view-name="admin/basedata/ElectricUnitManagement"/>
+    <mvc:view-controller path="/admin/basedata/ElectricPaymentDate" view-name="admin/basedata/ElectricPaymentDate"/>
+    <mvc:view-controller path="/admin/basedata/QunuanfeiUnitManagement" view-name="admin/basedata/QunuanfeiUnitManagement"/>
+    <mvc:view-controller path="/admin/basedata/QunuanfeiPaymentDate" view-name="admin/basedata/QunuanfeiPaymentDate"/>
+    <mvc:view-controller path="/admin/basedata/QunuanfeiDiscount" view-name="admin/basedata/QunuanfeiDiscount"/>
+    <mvc:view-controller path="/admin/basedata/QunuanfeiZhinajin" view-name="admin/basedata/QunuanfeiZhinajin"/>
+    <mvc:view-controller path="/admin/basedata/WeixiufeiPaymentDate" view-name="admin/basedata/WeixiufeiPaymentDate"/>
+    <mvc:view-controller path="/admin/basedata/WeixiufeiUnitManagement" view-name="admin/basedata/WeixiufeiUnitManagement"/>
+    
+    
+    <mvc:view-controller path="/ElectricCharge" view-name="ElectricCharge"/>
+    <mvc:view-controller path="/ElectricChargePrint" view-name="ElectricChargePrint"/>
+    <mvc:view-controller path="/ElectricChaobiao" view-name="ElectricChaobiao"/>
+    <mvc:view-controller path="/QunuanfeiCharge" view-name="QunuanfeiCharge"/>
+    <mvc:view-controller path="/QunuanfeiChargePrint" view-name="QunuanfeiChargePrint"/>
+    <mvc:view-controller path="/HouseRepairChargePrint" view-name="HouseRepairChargePrint"/>
+    <mvc:view-controller path="/HouseRepairCharge" view-name="HouseRepairCharge"/>
+    <mvc:view-controller path="/ElectricTongji" view-name="ElectricTongji"/>
+    <mvc:view-controller path="/QunuanfeiTongji" view-name="QunuanfeiTongji"/>
+    <mvc:view-controller path="/WeixiufeiTongji" view-name="WeixiufeiTongji"/>
+    <mvc:view-controller path="/ElectricTongji" view-name="ElectricTongji"/>
+    <mvc:view-controller path="/ElectricChargePrint2Page" view-name="ElectricChargePrint2Page"/>
+    <mvc:view-controller path="/ElectricChargePrint3Page" view-name="ElectricChargePrint3Page"/>
+    <mvc:view-controller path="/ElectricChargePrintForLvshun" view-name="ElectricChargePrintForLvshun"/>
+    
+    <mvc:view-controller path="/home" view-name="home"/>
+
+    <!-- View Resolver for JSPs -->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="requestContextAttribute" value="rc"/>
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/pages/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+    
+    <!-- Add additional controller beans here -->
+</beans>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MenuConfig>
+    <Displayers>
+        <Displayer name="Velocity" type="net.sf.navigator.displayer.VelocityMenuDisplayer"/>
+    </Displayers>
+    <Menus>
+<!--         <Menu name="Home" title="home.title" page="/home" roles="ROLE_ADMIN,ROLE_USER"/> -->
+<!--         <Menu name="UserMenu" title="menu.user" description="User Menu" page="/userform" roles="ROLE_ADMIN,ROLE_USER"/> -->
+        <Menu name="AdminMenu" title="menu.admin" description="Admin Menu" roles="ROLE_SUPERADMIN,ROLE_ADMIN">
+<!--             <Item name="ViewUsers" title="menu.admin.users" page="/admin/users"/> -->
+<!--             <Item name="ActiveUsers" title="home.activeUsers" page="/admin/activeUsers"/> -->
+<!--             <Item name="ReloadContext" title="menu.admin.reload" page="/admin/reload"/> -->
+<!--             <Item name="FileUpload" title="menu.selectFile" page="/fileupload"/> -->
+            <Item name="UserManagement" title="用户管理" page="/admin/UserManagement"/>
+            <Item name="BaseManagement" title="区域管理" page="/admin/basedata/BaseManagement"/>
+            <Item name="LouzuoManagement" title="楼座管理" page="/admin/basedata/LouzuoManagement"/> 
+<!--             <Item name="FangwuZongheChaxun" title="房屋综合管理" page="/admin/basedata/FangwuZongheChaxun"/> -->
+            <Item name="ElectricUnitManagement" title="电费单价" page="/admin/basedata/ElectricUnitManagement"/>
+            <Item name="ElectricPaymentDate" title="电费缴纳日期" page="/admin/basedata/ElectricPaymentDate"/>
+            <Item name="QunuanfeiUnitManagement" title="取暖费单价" page="/admin/basedata/QunuanfeiUnitManagement"/>
+            <Item name="QunuanfeiPaymentDate" title="取暖费缴纳日期" page="/admin/basedata/QunuanfeiPaymentDate"/>
+            <Item name="QunuanfeiDiscount" title="取暖费优惠" page="/admin/basedata/QunuanfeiDiscount"/>
+<!--             <Item name="QunuanfeiZhinajin" title="取暖费滞纳金" page="/admin/basedata/QunuanfeiZhinajin"/> -->
+            <Item name="QunuanfeiUnitManagement" title="维修费单价" page="/admin/basedata/WeixiufeiUnitManagement"/>
+            <Item name="QunuanfeiPaymentDate" title="维修费缴纳日期" page="/admin/basedata/WeixiufeiPaymentDate"/>
+        </Menu>
+        <Menu name="FangwuZongheChaxun" title="房屋综合管理" page="/admin/basedata/FangwuZongheChaxun" roles="ROLE_SUPERADMIN,ROLE_ADMIN,ROLE_HOUSEADMIN"/>
+        <Menu name="ElectricCharge" title="收电费" page="/ElectricCharge" roles="ROLE_SUPERADMIN,ROLE_ADMIN,ROLE_USER"/>
+        <Menu name="ElectricChaobiao" title="抄表" page="/ElectricChaobiao" roles="ROLE_SUPERADMIN,ROLE_ADMIN,ROLE_USER,ROLE_HOUSEADMIN"/>
+        <Menu name="QunuanfeiCharge" title="收取暖费" page="/QunuanfeiCharge" roles="ROLE_SUPERADMIN,ROLE_ADMIN,ROLE_USER"/>
+        <Menu name="HouseRepairCharge" title="收房屋维修费" page="/HouseRepairCharge" roles="ROLE_SUPERADMIN,ROLE_ADMIN,ROLE_USER"/>
+        
+        <Menu name="Logout" title="user.logout" page="/logout" roles="ROLE_SUPERADMIN,ROLE_ADMIN,ROLE_USER,ROLE_HOUSEADMIN"/>
+        
+        <Menu name="ElectricTongji" title="电费统计报表" page="/ElectricTongji" roles="ROLE_SUPERADMIN,ROLE_ADMIN,ROLE_USER"/>
+        <Menu name="QunuanfeiTongji" title="取暖费统计报表" page="/QunuanfeiTongji" roles="ROLE_SUPERADMIN,ROLE_ADMIN,ROLE_USER"/>
+        <Menu name="WeixiufeiTongji" title="房屋维修费统计报表" page="/WeixiufeiTongji" roles="ROLE_SUPERADMIN,ROLE_ADMIN,ROLE_USER"/>
+        
+<!--         <Menu name="AppFuseSample" title="AppFuse 示例" description="Admin Menu" roles="ROLE_SUPERADMIN"> -->
+<!--             <Item name="ViewUsers" title="menu.admin.users" page="/admin/users"/> -->
+<!--             <Item name="ActiveUsers" title="home.activeUsers" page="/admin/activeUsers"/> -->
+<!--             <Item name="UserMenu" title="menu.user" page="/userform"/> -->
+<!--         </Menu> -->
+        
+<!--         <Menu name="BaseDataManage" title="基础数据管理" description="基础数据管理" roles="ROLE_ADMIN" page="/admin/basedata/AreaManagement"> -->
+<!--             <Item name="AreaManagement" title="区域管理" page="/admin/basedata/AreaManagement"/> -->
+<!--             <Item name="LouzuoManagement" title="楼座管理" page="/admin/basedata/LouzuoManagement"/>  -->
+<!--         </Menu> -->
+    </Menus>
+</MenuConfig>

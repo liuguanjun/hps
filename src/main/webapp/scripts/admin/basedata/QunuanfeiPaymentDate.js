@@ -1,0 +1,98 @@
+<%@ page pageEncoding="UTF-8" %>
+<script type="text/javascript">
+$(function(){
+	$('#newPaymentDateDialogForm').form({
+		url : "${ctx}/heatingPaymentDate/addHeatPaymentAndZhinajin",
+		method : "post",
+		success : function(data) {
+			if (typeof data == "string") {
+				var dataObj = $.parseJSON(data);  
+				if (dataObj.error) {
+					$.messager.alert('警告', dataObj.errorMsg);
+					return;
+				}
+			}
+			$('#newPaymentDateDialog').dialog('close');
+			$('#data_grid').datagrid('reload');
+		}
+	});
+
+});
+
+function deleteUser() {
+	$.messager.confirm('确认','您确认想要删除记录吗？',function(r){    
+	    if (r){    
+	    	//$.messager.alert('确认','删除成功！');    
+	    } else {
+	    	
+	    }
+	});  
+}
+
+function formatTreeNode(node) {
+	return node.name;
+}
+
+function selectFirstNode(node, data) {
+	var firstRootNode = $('#baseTree').tree("getRoot");
+	$('#baseTree').tree("select", firstRootNode.target);
+	$('#data_grid').datagrid('reload');
+}
+
+function setQueryParams(params) {
+	var selectedNode = $('#baseTree').tree("getSelected");
+	if (selectedNode) {
+		$('#data_grid').datagrid("options").url = ctx + "/heatingPaymentDate/getHeatPaymentAndZhinajin/" + selectedNode.id;
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function openNewPaymentDateDialog() {
+	$('#newPaymentDateDialog #base_id').val("");
+	$('#newPaymentDateDialog #id').val("");
+	$('#newPaymentDateDialog').dialog('open');
+}
+
+function getOperHTML(value,row,index){
+    return '<input type="button" value="编辑" onclick="openUpdateDialog(' + row.id + ');"></input>';
+}
+
+function openUpdateDialog(paymentDateId) {
+	if (!paymentDateId) {
+		var selectedRow = $('#data_grid').datagrid('getSelected');
+		if (selectedRow) {
+			paymentDateId = selectedRow.id;
+		} else {
+			$.messager.alert('警告','请选择要编辑的记录');
+			return;
+		}
+	}
+	$.ajax({
+		url: "${ctx}/heatingPaymentDate/getPaymentDateAndZhinajinById/" + paymentDateId, 
+		success: function(data) {
+			$('#newPaymentDateDialog #id').val(data[0].id);
+			$('#newPaymentDateDialog #title').val(data[0].title);
+			$('#newPaymentDateDialog #payStartDate').datebox('setValue', data[0].payStartDate);	// 设置日期输入框的值
+			$('#newPaymentDateDialog #payEndDate').datebox('setValue', data[0].payEndDate);
+			$('#newPaymentDateDialog #zhinajinRate').val(data[0].zhinajinRate * 1000);
+			$('#newPaymentDateDialog #stopHeatingRate').val(data[0].stopHeatingRate * 100);
+			$('#newPaymentDateDialog #livingSoHardRate').val(data[0].livingSoHardRate * 100);
+			$('#newPaymentDateDialog').dialog('open');
+		}});
+}
+
+function submitNewPaymentDateForm() {
+	if ($('#newPaymentDateDialog').form('validate')) {
+		var selectedNode = $('#baseTree').tree('getSelected');
+		$('#newPaymentDateDialogForm #base_id').val(selectedNode.id);
+		$('#newPaymentDateDialogForm').submit();
+	}
+}
+
+
+
+
+</script>
+

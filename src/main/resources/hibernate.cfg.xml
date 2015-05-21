@@ -1,0 +1,34 @@
+<!-- NOTE: If you're working offline, you might have to change the DOCTYPE to the following:
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">-->
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+<!--         <property name="hibernate.show_sql">true</property> -->
+<!--         <property name="hibernate.format_sql">true</property> -->
+        <mapping class="org.appfuse.model.User"/>
+        <mapping class="org.appfuse.model.Role"/>
+        <mapping class="com.my.hps.webapp.model.HpsBase"/>
+        <mapping class="com.my.hps.webapp.model.HpsArea"/>
+        <mapping class="com.my.hps.webapp.model.HpsUser"/>
+        <mapping class="com.my.hps.webapp.model.HpsDict"/>
+        <mapping class="com.my.hps.webapp.model.HpsDictItem"/>
+        <mapping class="com.my.hps.webapp.model.HpsLouzuo"/>
+        <mapping class="com.my.hps.webapp.model.HpsHouse"/>
+        <mapping class="com.my.hps.webapp.model.HpsHouseOwner"/>
+        <mapping class="com.my.hps.webapp.model.HpsElectricPaymentDate"/>
+        <mapping class="com.my.hps.webapp.model.HpsElectricUnit"/>
+        <mapping class="com.my.hps.webapp.model.HpsElectricChaobiao"/>
+        <mapping class="com.my.hps.webapp.model.HpsElectricChargeRecord"/>
+        <mapping class="com.my.hps.webapp.model.HpsHeatingChargeRecord"/>
+        <mapping class="com.my.hps.webapp.model.HpsHeatingPaymentDate"/>
+        <mapping class="com.my.hps.webapp.model.HpsHeatingPaymentDatePreferential"/>
+        <mapping class="com.my.hps.webapp.model.HpsHeatingShenfenXingzhiPreferential"/>
+        <mapping class="com.my.hps.webapp.model.HpsHeatingUnit"/>
+        <mapping class="com.my.hps.webapp.model.HpsMaintainPaymentDate"/>
+        <mapping class="com.my.hps.webapp.model.HpsMaintainUnit"/>
+        <mapping class="com.my.hps.webapp.model.HpsMaintainChargeRecord"/>
+    </session-factory>
+</hibernate-configuration>
