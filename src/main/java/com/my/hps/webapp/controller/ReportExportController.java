@@ -51,7 +51,7 @@ public class ReportExportController extends BaseFormController {
     private static final String REPORT_CONFIG_FILE_CATEGORY_ELECTRIC = "/../reports/electric_charge_record_final";
     private static final String REPORT_CONFIG_FILE_CATEGORY_MAINTAIN = "/../reports/maintain_charge_record_final";
     
-    private static final String REPORT_CONFIG_FILE_CATEGORY_HEATING_ALL = "/../reports/heating_charge_record_all";
+    private static final String REPORT_CONFIG_FILE_CATEGORY_HEATING_ALL = "/../reports/heating_charge_record_all111";
     
     @RequestMapping(method = RequestMethod.GET, value = "heatingall")
     @ResponseBody
