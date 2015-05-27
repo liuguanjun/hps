@@ -164,11 +164,11 @@
 	<div class="easyui-layout" fit="true" style="margin-top: 5px;">
 	    <table id="tongjiResult">
     		<tr>
-    		    <td><span style="margin-left: 10px;">应收取暖费:</span></td>
+    		    <td><span style="margin-left: 10px;">应收维修费:</span></td>
     			<td>
     			   <span style="margin-left: 10px;" id="yingshouMaintainCharge">0</span>元</td>
     			</td>
-    			<td><span style="margin-left: 10px;">已收取暖费:</span></td>
+    			<td><span style="margin-left: 10px;">已收维修费:</span></td>
     			<td>
     			   <span style="margin-left: 10px;" id="yishouMaintainCharge">0</span>元</td>
     			</td>
