@@ -19,6 +19,7 @@
     <menu:displayMenu name="ElectricTongji"/>
     <menu:displayMenu name="QunuanfeiTongji"/>
     <menu:displayMenu name="WeixiufeiTongji"/>
+    <menu:displayMenu name="HeatingMaintain"/>
     
 <%--     <menu:displayMenu name="BaseDataManage"/> --%>
     <menu:displayMenu name="Logout"/>

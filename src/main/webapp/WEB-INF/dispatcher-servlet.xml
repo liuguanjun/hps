@@ -62,6 +62,9 @@
     <mvc:view-controller path="/ElectricChargePrint3Page" view-name="ElectricChargePrint3Page"/>
     <mvc:view-controller path="/ElectricChargePrintForLvshun" view-name="ElectricChargePrintForLvshun"/>
     
+    <mvc:view-controller path="/HeatingMaintainCharge" view-name="HeatingMaintainCharge"/>
+    <mvc:view-controller path="/HeatingMaintainTongji" view-name="HeatingMaintainTongji"/>
+    
     <mvc:view-controller path="/home" view-name="home"/>
 
     <!-- View Resolver for JSPs -->

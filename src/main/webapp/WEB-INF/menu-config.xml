@@ -37,6 +37,11 @@
         <Menu name="QunuanfeiTongji" title="取暖费统计报表" page="/QunuanfeiTongji" roles="ROLE_SUPERADMIN,ROLE_ADMIN,ROLE_USER"/>
         <Menu name="WeixiufeiTongji" title="房屋维修费统计报表" page="/WeixiufeiTongji" roles="ROLE_SUPERADMIN,ROLE_ADMIN,ROLE_USER"/>
         
+        <Menu name="HeatingMaintain" title="供暖改造" roles="ROLE_SUPERADMIN,ROLE_ADMIN,ROLE_USER">
+            <Item name="HeatingMaintainCharge" title="供暖改造缴费" page="/HeatingMaintainCharge"/>
+            <Item name="HeatingMaintainTongji" title="供暖改造费统计报表" page="/HeatingMaintainTongji"/>
+        </Menu>
+        
 <!--         <Menu name="AppFuseSample" title="AppFuse 示例" description="Admin Menu" roles="ROLE_SUPERADMIN"> -->
 <!--             <Item name="ViewUsers" title="menu.admin.users" page="/admin/users"/> -->
 <!--             <Item name="ActiveUsers" title="home.activeUsers" page="/admin/activeUsers"/> -->

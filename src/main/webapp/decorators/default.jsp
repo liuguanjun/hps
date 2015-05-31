@@ -48,10 +48,10 @@
                 </menu:useMenuDisplayer>
                 </div>
             </c:if>
-            <c:if test="${currentMenu == 'AppFuseSample'}">
+            <c:if test="${currentMenu == 'HeatingMaintain'}">
                 <div class="col-sm-2">
                 <menu:useMenuDisplayer name="Velocity" config="navlistMenu.vm" permissions="rolesAdapter">
-                    <menu:displayMenu name="AppFuseSample"/>
+                    <menu:displayMenu name="HeatingMaintain"/>
                 </menu:useMenuDisplayer>
                 </div>
             </c:if>

@@ -57,8 +57,8 @@ public class HpsHeatingMaintain2015ChargeManagerImpl extends GenericManagerImpl<
     @Override
     @Transactional(readOnly = true)
     public HeatingMaintainChargeRecordPaginationResult2015 getChargeRecords(HeatingMaintainCharge2015QueryParam param) {
-        // TODO Auto-generated method stub
-        return null;
+        HeatingMaintainChargeRecordPaginationResult2015 result = concreteDao.getChargeRecords(param);
+        return result;
     }
 
     @Override
