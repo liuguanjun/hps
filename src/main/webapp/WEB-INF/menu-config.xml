@@ -23,6 +23,7 @@
 <!--             <Item name="QunuanfeiZhinajin" title="取暖费滞纳金" page="/admin/basedata/QunuanfeiZhinajin"/> -->
             <Item name="QunuanfeiUnitManagement" title="维修费单价" page="/admin/basedata/WeixiufeiUnitManagement"/>
             <Item name="QunuanfeiPaymentDate" title="维修费缴纳日期" page="/admin/basedata/WeixiufeiPaymentDate"/>
+            <Item name="HeatingMaintainPaymentDate" title="供暖改造缴纳日期" page="/admin/basedata/HeatingMaintainPaymentDate"/>
         </Menu>
         <Menu name="FangwuZongheChaxun" title="房屋综合管理" page="/admin/basedata/FangwuZongheChaxun" roles="ROLE_SUPERADMIN,ROLE_ADMIN,ROLE_HOUSEADMIN"/>
         <Menu name="ElectricCharge" title="收电费" page="/ElectricCharge" roles="ROLE_SUPERADMIN,ROLE_ADMIN,ROLE_USER"/>

@@ -32,6 +32,11 @@ public class HpsHeatingMaintainPaymentDate2015 extends HpsBaseObject {
      * 基地
      */
     private HpsBase base;
+    
+    /**
+     * 标题
+     */
+    private String title;
 
     /**
      * 缴费开始日期
@@ -82,6 +87,15 @@ public class HpsHeatingMaintainPaymentDate2015 extends HpsBaseObject {
 
     public void setPayEndDate(Date payEndDate) {
         this.payEndDate = payEndDate;
+    }
+    
+    @Column(nullable = false, length = 100)
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     @Column(length = 500)

@@ -45,7 +45,7 @@
     <mvc:view-controller path="/admin/basedata/QunuanfeiZhinajin" view-name="admin/basedata/QunuanfeiZhinajin"/>
     <mvc:view-controller path="/admin/basedata/WeixiufeiPaymentDate" view-name="admin/basedata/WeixiufeiPaymentDate"/>
     <mvc:view-controller path="/admin/basedata/WeixiufeiUnitManagement" view-name="admin/basedata/WeixiufeiUnitManagement"/>
-    
+    <mvc:view-controller path="/admin/basedata/HeatingMaintainPaymentDate" view-name="admin/basedata/HeatingMaintainPaymentDate"/>
     
     <mvc:view-controller path="/ElectricCharge" view-name="ElectricCharge"/>
     <mvc:view-controller path="/ElectricChargePrint" view-name="ElectricChargePrint"/>
