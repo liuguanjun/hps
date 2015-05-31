@@ -6,6 +6,7 @@ import org.appfuse.service.hps.HpsHeatingMaintain2015ChargeManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,6 +24,13 @@ public class HeatingMaintain2015Controller extends BaseFormController {
 	        HpsHeatingMaintain2015ChargeManager manager) {
 		this.manager = manager;
 	}
+	
+    @RequestMapping(method = RequestMethod.GET, value = "paymentdate/{recordId}")
+    @ResponseBody
+    public HpsHeatingMaintainPaymentDate2015 getPaymentDate(@PathVariable Long recordId) {
+        HpsHeatingMaintainPaymentDate2015 paymentDate = manager.getPaymentDate(recordId);
+        return paymentDate;
+    }
 	
     @RequestMapping(method = RequestMethod.GET, value = "paymentdates")
     @ResponseBody

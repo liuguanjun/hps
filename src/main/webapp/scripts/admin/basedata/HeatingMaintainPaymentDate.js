@@ -2,8 +2,8 @@
 <script type="text/javascript">
 $(function(){
 	$('#newPaymentDateDialogForm').form({
-		url : "${ctx}/weixiufeiPaymentDate/addWeixiufeiPayment",
-		method : "post",
+		url : "${ctx}/heatingmaintain2015/paymentdate",
+		method : "put",
 		success : function(data) {
 			if (typeof data == "string") {
 				var dataObj = $.parseJSON(data);  
@@ -34,10 +34,14 @@ function openUpdateDialog(paymentDateId) {
 		}
 	}
 	$.ajax({
-		url: "${ctx}/weixiufeiPaymentDate/getPaymentDateById/" + paymentDateId, 
+		url: "${ctx}/heatingmaintain2015/paymentdate/" + paymentDateId, 
 		success: function(data) {
-			$('#newPaymentDateDialog #id').val(data[0].id);
-			$('#newPaymentDateDialog #title').val(data[0].title);
+			$('#newPaymentDateDialog #id').val(data.id);
+			$('#newPaymentDateDialog #title').val(data.title);
+			$('#newPaymentDateDialog #payStartDate').datebox('setValue', data.payStartDate);
+			$('#newPaymentDateDialog #payEndDate').datebox('setValue', data.payEndDate);
+			$('#newPaymentDateDialog #unit').val(data.unit);
+			$('#newPaymentDateDialog').form('validate')
 			$('#newPaymentDateDialog').dialog('open');
 		}});
 }

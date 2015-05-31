@@ -12,8 +12,8 @@
 	<div id="newPaymentDateDialog" class="easyui-dialog" title="缴纳日期" style="width:700px" data-options="closed:true">
 		<div style="padding:10px 0 10px 20px">
 	    <form:form id="newPaymentDateDialogForm" method="post">
-	        <input id="base_id" type="hidden" name="base.id"/>
 	        <input id="id" type="hidden" name="id"/>
+	        <input type="hidden" name="_method" value="put" />
 	    	<table>
 	    		<tr>
 	    			<td><div style="margin-left: 10px;text-align:right">供暖改造费缴纳标题:</div></td>
@@ -27,7 +27,7 @@
     				</td>
 	    		</tr>
 	    		<tr>
-	    			<td>单价:</td>
+	    			<td><div style="margin-left: 10px;text-align:right">单价:</div></td>
 	    			<td><input id="unit" class="easyui-validatebox" type="text" name="unit" data-options="required:true" style="width: 100px;"></input>元/平方米
 	    			</td>
 	    		</tr>
