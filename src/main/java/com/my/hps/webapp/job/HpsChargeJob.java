@@ -3,6 +3,7 @@ package com.my.hps.webapp.job;
 import org.appfuse.service.hps.HpsElectricChaobiaoManager;
 import org.appfuse.service.hps.HpsElectricPaymentDateManager;
 import org.appfuse.service.hps.HpsHeatingChargeManager;
+import org.appfuse.service.hps.HpsHeatingMaintain2015ChargeManager;
 import org.appfuse.service.hps.HpsMaintainChargeManager;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ public class HpsChargeJob implements InitializingBean {
 	private HpsMaintainChargeManager maitainManager;
 	private HpsElectricChaobiaoManager chaobiaoManager;
 	private HpsElectricPaymentDateManager elePaymentDateManager;
+	private HpsHeatingMaintain2015ChargeManager heatingMaintainManager;
 	
     @Scheduled(cron = "0 0 12 * * ?") // 每天12点
 //	@Scheduled(cron = "0 0/5 * * * ?") // 五分钟一次，测试用
@@ -26,6 +28,7 @@ public class HpsChargeJob implements InitializingBean {
     	maitainManager.initializeChargeRecords();
     	elePaymentDateManager.initializePymentDates();
     	chaobiaoManager.initializeChaobiaoRecords();
+    	heatingMaintainManager.initializeChargeRecords();
     }
 
     @Autowired
@@ -48,8 +51,13 @@ public class HpsChargeJob implements InitializingBean {
 			HpsElectricPaymentDateManager elePaymentDateManager) {
 		this.elePaymentDateManager = elePaymentDateManager;
 	}
+    
+    @Autowired
+	public void setHeatingMaintainManager(HpsHeatingMaintain2015ChargeManager heatingMaintainManager) {
+        this.heatingMaintainManager = heatingMaintainManager;
+    }
 
-	@Override
+    @Override
 	public void afterPropertiesSet() throws Exception {
 		initChargeRecords();
 	}

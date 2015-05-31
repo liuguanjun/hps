@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.appfuse.dao.hps.HpsHouseDao;
 import org.appfuse.service.hps.HpsHeatingChargeManager;
+import org.appfuse.service.hps.HpsHeatingMaintain2015ChargeManager;
 import org.appfuse.service.hps.HpsHouseManager;
 import org.appfuse.service.hps.HpsMaintainChargeManager;
 import org.appfuse.service.impl.GenericManagerImpl;
@@ -60,6 +61,9 @@ public class HpsHouseManagerImpl extends GenericManagerImpl<HpsHouse, Long>
 		// 重新生成房屋维修费缴费记录
 		HpsMaintainChargeManager maintainManager = appContext.getBean(HpsMaintainChargeManager.class);
 		maintainManager.initializeChargeRecordCurrentYear(savedHouse);
+		// 重新生成取暖改造缴费记录
+		HpsHeatingMaintain2015ChargeManager heatingMaintainManager = appContext.getBean(HpsHeatingMaintain2015ChargeManager.class);
+		heatingMaintainManager.initializeChargeRecord(savedHouse);
 		return savedHouse;
 	}
 	

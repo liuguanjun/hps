@@ -40,17 +40,18 @@
 	    </div>
 	</div>
 	<table id="data_grid" class="easyui-datagrid"  title="查询结果" 
-			data-options="url:'${ctx}/weixiufeiPaymentDate/getWeixiufeiPayment',
-			singleSelect:false,
+			data-options="url:'${ctx}/heatingmaintain2015/paymentdates',
+			singleSelect:true,
 			collapsible:true,
 			method:'get',
 			pageSize:10"
 			rownumbers="true" pagination="true" >
 		<thead>
 			<tr>
+			    <th data-options="field:'base.name',width:100,align:'center',formatter:getNestedValue">基地</th>
 				<th data-options="field:'title',width:200,align:'center'">供暖改造费缴纳标题</th>
 				<th data-options="field:'payStartDate',width:100,align:'center'">缴纳日期开始</th>
-				<th data-options="field:'payEndDate',width:100,align:'center',formatter:getNestedValue">缴纳日期结束</th>
+				<th data-options="field:'payEndDate',width:100,align:'center'">缴纳日期结束</th>
 				<th data-options="field:'unit',align:'center',width:100" >单价</th>
 				<th data-options="field:'id',width:120,align:'center',formatter:getOperHTML">操作</th>
 			</tr>

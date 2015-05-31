@@ -59,6 +59,11 @@ public class HpsHeatingMaintainChargeRecord2015 extends HpsBaseObject {
 	private ChargeStateEnum chargeState;
 	
 	/**
+     * 是否免缴
+     */
+    private boolean gratis = false;
+	
+	/**
 	 * 应该收取金额
 	 */
 	private Double mustCharge;
@@ -123,6 +128,15 @@ public class HpsHeatingMaintainChargeRecord2015 extends HpsBaseObject {
 	public String getWageNum() {
 		return wageNum;
 	}
+	
+    @Column
+    public boolean isGratis() {
+        return gratis;
+    }
+
+    public void setGratis(boolean gratis) {
+        this.gratis = gratis;
+    }
 
 	public void setWageNum(String wageNum) {
 		this.wageNum = wageNum;
