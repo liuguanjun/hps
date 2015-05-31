@@ -30,5 +30,7 @@
         <mapping class="com.my.hps.webapp.model.HpsMaintainPaymentDate"/>
         <mapping class="com.my.hps.webapp.model.HpsMaintainUnit"/>
         <mapping class="com.my.hps.webapp.model.HpsMaintainChargeRecord"/>
+        <mapping class="com.my.hps.webapp.model.HpsHeatingMaintainPaymentDate2015"/>
+        <mapping class="com.my.hps.webapp.model.HpsHeatingMaintainChargeRecord2015"/>
     </session-factory>
 </hibernate-configuration>
