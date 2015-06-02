@@ -135,7 +135,7 @@ function recordOnUncheck() {
 
 function setDialogData(recordId, readOnly) {
 	$.ajax({
-		url: "${ctx}/heatingcharge/chargerecord/" + recordId, 
+		url: "${ctx}/heatingmaintain2015/chargerecord/" + recordId, 
 		success: function(data) {
 			$('#recordId').val(data.id);
 			if (data.chargeState == g_chargestate_charged) { // 已缴费
@@ -143,43 +143,16 @@ function setDialogData(recordId, readOnly) {
 			} else {
 				$('#chargeDate').val(nowDateStr);
 			}
-			$('#divertedCharge').val(data.divertedCharge);
-			$('#normalHeatingCharge').val(data.normalHeatingCharge);
-			$('#preferential').val(data.preferential);
-			$('#mustZhinajin').val(data.mustZhinajin);
-			$('#zhinajinOn').removeProp("checked");
-			$('#stopped').removeProp("checked");
-			$('#livingSohard').removeProp("checked");
-			if (data.chargeState == g_chargestate_charged) { // 已缴费
-				if (data.zhinajinOn) {
-					$('#zhinajinOn').prop("checked", "checked");
-				}
-				if (data.stopped) {
-					$('#stopped').prop("checked", "checked");
-				}
-				if (data.livingSohard) {
-					$('#livingSohard').prop("checked", "checked");
-				}
-			}
-			$('#mustSumCharge').val(data.mustSumCharge);
+
+			$('#mustCharge').val(data.mustCharge);
 			
 			$('#paymentDateTitle').val(data.paymentDate.title);
 			$('#chargeState').val(data.chargeState);
-//			$('#payStartDate').val(data.paymentDate.payStartDate);
-//			$('#payEndDate').val(data.paymentDate.payEndDate);
-			$('#unit').val(data.unit.unit + "元/平米");
-			$('#diverted').val(data.diverted ? "是" : "否");
-			$('#expiredDays').val(data.expiredDays);
-			$('#zhinajinRate').val(data.paymentDate.zhinajinRate * 1000 + "‰/日");
-			$('#preferentialDesc').val(data.preferentialDesc);
-			$('#divertedMsg').val(data.divertedMsg);
-			$('#cancelled').val(data.cancelled ? "是" : "否");
-			$('#stoppedRate').text(data.paymentDate.stopHeatingRate * 100);
-			$('#livingSohardRate').text(data.paymentDate.livingSoHardRate * 100);
+			$('#unit').val(data.paymentDate.unit + "元/平米");
 			
 			$('#houseAddress').val(data.house.address);
 			$('#yongfangXingzhi').val(data.house.yongfangXingzhi.name);
-			$('#warmArea').val(data.house.warmArea + "平米");
+			$('#repairArea').val(data.house.repairArea + "平米");
 			$('#ownerName').val(data.houseOwner.name);
 			$('#shenfenXingzhi').val(data.house.shenfenXingzhi.name);
 			$('#owerIdCardNo').val(data.houseOwner.idCardNo);
@@ -187,12 +160,13 @@ function setDialogData(recordId, readOnly) {
 			$('#wageNum').val(data.wageNum);
 			$('#operUserName').val(data.operUser.userName);
 			$("#remarks").val(data.remarks);
+			$('#cancelled').val(data.cancelled ? "是" : "否");
 			if (data.chargeState == g_chargestate_charged) { // 已缴费
-				$("#actualSumCharge").numberbox("setValue", data.actualSumCharge.replace(",", ""));
+				$("#actualCharge").numberbox("setValue", data.actualCharge.replace(",", ""));
 			} else {
-				var mustSumCharge = data.mustSumCharge.replace(",", ""); // 去除千位分隔符
-				mustSumCharge = formatNummber(mustSumCharge, 1) + "0"; // 不收分钱
-				$("#actualSumCharge").numberbox("setValue", readOnly ? "0" : mustSumCharge.replace(",", ""));
+				var mustCharge = data.mustCharge.replace(",", ""); // 去除千位分隔符
+				mustCharge = formatNummber(mustCharge, 1) + "0"; // 不收分钱
+				$("#actualCharge").numberbox("setValue", readOnly ? "0" : mustCharge.replace(",", ""));
 			}
 			if (data.chargeState == g_chargestate_cancelled) { // 已取消
 				// 此处其实应该有单独的字段作为取消时间以及取消人，为了简单，暂且使用记录的最后更改时间以及更改人

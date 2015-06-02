@@ -197,7 +197,7 @@ public class HpsHeatingMaintainChargeRecord2015 extends HpsBaseObject {
 		if (chargeState == ChargeStateEnum.CHARGED) {
 			return mustCharge;
 		} else {
-			Double result = paymentDate.getUnit() * house.getWarmArea();
+			Double result = paymentDate.getUnit() * house.getRepairArea();
 			BigDecimal resultBigDecimal = new BigDecimal(result);
 			resultBigDecimal = resultBigDecimal.setScale(2, RoundingMode.HALF_UP);
 			return resultBigDecimal.doubleValue();

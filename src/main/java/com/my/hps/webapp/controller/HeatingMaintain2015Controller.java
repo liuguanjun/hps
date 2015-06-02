@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.my.hps.webapp.controller.queryparam.HeatingMaintainCharge2015QueryParam;
 import com.my.hps.webapp.model.HeatingMaintainChargeRecordPaginationResult2015;
+import com.my.hps.webapp.model.HpsHeatingMaintainChargeRecord2015;
 import com.my.hps.webapp.model.HpsHeatingMaintainPaymentDate2015;
+import com.my.hps.webapp.util.SecurityUtil;
 
 @Controller
 @RequestMapping("/heatingmaintain2015/")
@@ -58,6 +60,14 @@ public class HeatingMaintain2015Controller extends BaseFormController {
     @ResponseBody
     public HeatingMaintainChargeRecordPaginationResult2015 getChargeRecords(@ModelAttribute HeatingMaintainCharge2015QueryParam param) {
         HeatingMaintainChargeRecordPaginationResult2015 result = manager.getChargeRecords(param);
+        return result;
+    }
+    
+    @RequestMapping(method = RequestMethod.GET, value = "chargerecord/{recordId}")
+    @ResponseBody
+    public HpsHeatingMaintainChargeRecord2015 getChargeRecord(@PathVariable Long recordId) {
+        HpsHeatingMaintainChargeRecord2015 result = manager.get(recordId);
+        result.setOperUser(SecurityUtil.getCurrentUser());
         return result;
     }
 

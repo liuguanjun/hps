@@ -133,7 +133,7 @@
 				<th data-options="field:'houseOwner.name',width:70,align:'center',formatter:getNestedValue">户主姓名</th>
 				<th data-options="field:'house.address',width:240,align:'center',formatter:getNestedValue">房屋地址</th>
 				<th data-options="field:'chargeState',width:60,align:'center'">缴费状态</th>
-				<th data-options="field:'house.warmArea',width:70,align:'center',formatter:getNestedValue">建筑面积</th>
+				<th data-options="field:'house.repairArea',width:70,align:'center',formatter:getNestedValue">维修面积</th>
 				<th data-options="field:'paymentDate.unit',width:70,align:'center',formatter:getNestedValue">单价</th>
 				<th data-options="field:'chargeDate',width:130,align:'center'">缴费日期</th>
 				<th data-options="field:'mustCharge',width:70,align:'center'">应收合计</th>
@@ -156,7 +156,7 @@
     		</tr>
 		</table>
 	</div>
-	<div id="chargeDialog" class="easyui-dialog" title="缴费" style="width:760px;height: 450px;" data-options="closed:true,modal:true">
+	<div id="chargeDialog" class="easyui-dialog" title="缴费" style="width:760px;height: 320px;" data-options="closed:true,modal:true">
 		<div class="easyui-layout" fit="true" >
 		   <div region="east" border="false" split="true"  style="width:260px;">
 				 <div class="easyui-panel"  title="结算">
@@ -178,44 +178,14 @@
 		    			</td>
 		    		</tr>
 		    		<tr>
-		    			<td><span style="margin-left: 5px;">标收暖费 :</span></td>
-		    			<td><input id="normalHeatingCharge" readonly="readonly" style="width:100px;text-align: right;"></input>元</td>
-		    		</tr>
-		    		<tr>
-		    			<td><span style="margin-left: 5px;">优惠金额:</span></td>
-		    			<td><input id="preferential" readonly="readonly" style="width:100px;text-align: right;"></input>元</td>
-					</tr>
-		    		<tr>
-		    			<td><span style="margin-left: 5px;">滞纳金 :</span></td>
-		    			<td><input id="mustZhinajin" readonly="readonly" style="width:100px;text-align: right;"></input>元</td>
-		    		</tr>
-		    		<tr>
-		    			<td><span style="margin-left: 5px;">收取滞纳 :</span></td>
-		    			<td><input id="zhinajinOn" name="zhinajinOn" type="checkbox" onclick="zhinajinOnClick();"></input></td>
-		    		</tr>
-		    		<tr>
-		    			<td><span style="margin-left: 5px;">停供 :</span></td>
-		    			<td>
-		    			   <input style="vertical-align: middle;" id="stopped" name="stopped" type="checkbox" onclick="stoppedOnClick();"></input>
-		    			   <span style="vertical-align: middle;">&nbsp;(收取<span id="stoppedRate" style="vertical-align: middle;"></span>%)</span>
-		    			</td>
-		    		</tr>
-		    		<tr>
-		    			<td><span style="margin-left: 5px;">困难住户 :</span></td>
-		    			<td>
-		    			    <input style="vertical-align: middle;" id="livingSohard" name="livingSohard" type="checkbox" onclick="livingSohardOnClick();"></input>
-		    			    <span style="vertical-align: middle;">&nbsp;(收取<span id="livingSohardRate" style="vertical-align: middle;"></span>%)</span>
-		    			</td>
-		    		</tr>
-		    		<tr>
 		    			<td><span style="margin-left: 5px;">应收金额 :</span></td>
-		    			<td><input id="mustSumCharge" readonly="readonly" style="width:100px;text-align: right;"></input>元</td>
+		    			<td><input id="mustCharge" readonly="readonly" style="width:100px;text-align: right;"></input>元</td>
 		    		</tr>
 		    		<tr>
 		    		   <td><span style="margin-left: 5px;">实收金额:</span></td>
 		    			<td>
-		    				<input id="actualSumCharge" class="easyui-numberbox" data-options="required:true,min:0,precision:2,max:1000000"
-		    					 name="actualSumCharge" style="width:100px;text-align: right;" value="0"></input>元
+		    				<input id="actualCharge" class="easyui-numberbox" data-options="required:true,min:0,precision:2,max:1000000"
+		    					 name="actualCharge" style="width:100px;text-align: right;" value="0"></input>元
 						</td>
 		    		</tr>
 		    		<tr>
@@ -244,36 +214,16 @@
 		      <div class="easyui-panel"  title="缴费信息">
 			  	<table>
 				   <tr>
-				    <td><span style="margin-left: 20px;">收取年度:</span></td>
+				    <td><span style="margin-left: 20px;">收费项目:</span></td>
 					<td><input id="paymentDateTitle" readonly="readonly" style="width:135px;"></input></td>
 					<td><span style="margin-left: 20px;">缴费状态:</span></td>
 					<td><input id="chargeState" readonly="readonly" style="width:135px;"></input></td>
 				   </tr>
 				   <tr>
-				    <td><span style="margin-left: 10px;">取暖费单价:</span></td>
+				    <td><span style="margin-left: 10px;">单价:</span></td>
 					<td><input id="unit" readonly="readonly" style="width:135px;"></input></td>
-					<td><span style="margin-left: 20px;">是否结转:</span></td>
-					<td><input id="diverted" readonly="readonly" style="width:135px;"></input></td>
-				   </tr>
-				   <tr>
-				    <td><span style="margin-left: 20px;">逾期天数:</span></td>
-					<td><input id="expiredDays" readonly="readonly" style="width:135px;"></input></td>
-				    <td><span style="margin-left: 10px;">滞纳金比例:</span></td>
-					<td><input id="zhinajinRate" readonly="readonly" style="width:135px;"></input></td>
-				   </tr>
-				   <tr>
-				    <td><span style="margin-left: 20px;">优惠信息:</span></td>
-					<td colspan="3"><input id="preferentialDesc" readonly="readonly" style="width:350px;"></input></td>
-				   </tr>
-				   <tr>
-				    <td><span style="margin-left: 20px;">历年结转:</span></td>
-					<td><input id="divertedCharge" readonly="readonly" style="width:135px;"></input></td>
-				    <td><span style="margin-left: 10px;">是否被取消:</span></td>
+					<td><span style="margin-left: 10px;">是否被取消:</span></td>
 					<td><input id="cancelled" readonly="readonly" style="width:135px;"></input></td>
-				   </tr>
-				   <tr>
-				    <td><span style="margin-left: 20px;">结转详细:</span></td>
-					<td colspan="3"><input id="divertedMsg" readonly="readonly" style="width:350px;"></input></td>
 				   </tr>
 				   <tr>
 				    <td><span style="margin-left: 20px;">取消时间:</span></td>
@@ -296,8 +246,8 @@
 				   <tr>
 				    <td><span style="margin-left: 20px;">用房性质:</span></td>
 					<td><input id="yongfangXingzhi" readonly="readonly" style="width:135px;"></input></td>
-				    <td><span style="margin-left: 20px;">供热面积:</span></td>
-					<td><input id="warmArea" readonly="readonly" style="width:135px;"></input></td>
+				    <td><span style="margin-left: 20px;">维修面积:</span></td>
+					<td><input id="repairArea" readonly="readonly" style="width:135px;"></input></td>
 				   </tr>
 				   <tr>
 					<td><span style="margin-left: 20px;">户主姓名:</span></td>
