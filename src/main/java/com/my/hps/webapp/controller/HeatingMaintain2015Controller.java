@@ -9,10 +9,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.my.hps.webapp.controller.queryparam.HeatingMaintainCharge2015QueryParam;
 import com.my.hps.webapp.model.HeatingMaintainChargeRecordPaginationResult2015;
+import com.my.hps.webapp.model.HpsHeatingChargeRecord;
 import com.my.hps.webapp.model.HpsHeatingMaintainChargeRecord2015;
 import com.my.hps.webapp.model.HpsHeatingMaintainPaymentDate2015;
 import com.my.hps.webapp.util.SecurityUtil;
@@ -69,6 +71,16 @@ public class HeatingMaintain2015Controller extends BaseFormController {
         HpsHeatingMaintainChargeRecord2015 result = manager.get(recordId);
         result.setOperUser(SecurityUtil.getCurrentUser());
         return result;
+    }
+    
+    @RequestMapping(method = RequestMethod.PUT, value = "{recordId}/charge")
+    @ResponseBody
+    public HpsHeatingMaintainChargeRecord2015 charge(@PathVariable Long recordId, 
+                @RequestParam Double actualCharge,
+                @RequestParam(required = false, defaultValue = "") String wageNum,
+                @RequestParam(required = false, defaultValue = "") String remarks) {
+        HpsHeatingMaintainChargeRecord2015 record = manager.charge(recordId, actualCharge, wageNum, remarks);
+        return record;
     }
 
 }

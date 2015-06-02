@@ -1,5 +1,6 @@
 package org.appfuse.service.hps.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.appfuse.dao.hps.HpsBaseDao;
@@ -20,6 +21,7 @@ import com.my.hps.webapp.model.HpsHeatingMaintainChargeRecord2015;
 import com.my.hps.webapp.model.HpsHeatingMaintainPaymentDate2015;
 import com.my.hps.webapp.model.HpsHouse;
 import com.my.hps.webapp.model.enums.ChargeStateEnum;
+import com.my.hps.webapp.util.SecurityUtil;
 
 @Service
 public class HpsHeatingMaintain2015ChargeManagerImpl extends GenericManagerImpl<HpsHeatingMaintainChargeRecord2015, Long>
@@ -106,9 +108,17 @@ public class HpsHeatingMaintain2015ChargeManagerImpl extends GenericManagerImpl<
 
     @Override
     @Transactional
-    public HpsHeatingMaintainChargeRecord2015 charge(Long recordId, Double actualCharge, boolean gratis,
+    public HpsHeatingMaintainChargeRecord2015 charge(Long recordId, Double actualCharge, 
             String wageNum, String remarks) {
-        return null;
+        HpsHeatingMaintainChargeRecord2015 record = concreteDao.get(recordId);
+        record.setActualCharge(actualCharge);
+        record.setWageNum(wageNum);
+        record.setRemarks(remarks);
+        record.setChargeDate(new Date());
+        record.setOperUser(SecurityUtil.getCurrentUser());
+        record.setChargeState(ChargeStateEnum.CHARGED);
+        concreteDao.save(record);
+        return record;
     }
 
     @Override

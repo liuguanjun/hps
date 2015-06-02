@@ -10,7 +10,7 @@ function charge() {
 	if ($('#chargeForm').form('validate')) {
 		var recordId = $('#recordId').val();
 		$('#chargeForm').form("submit", {
-			url : "${ctx}/heatingcharge/" + recordId + "/actualCharge",
+			url : "${ctx}/heatingmaintain2015/" + recordId + "/charge",
 			success : function(data) {
 				if (typeof data == "string") {
 					var dataObj = $.parseJSON(data);  

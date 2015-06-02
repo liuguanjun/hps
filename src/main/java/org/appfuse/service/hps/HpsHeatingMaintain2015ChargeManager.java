@@ -30,7 +30,6 @@ public interface HpsHeatingMaintain2015ChargeManager extends GenericManager<HpsH
 	
 	HpsHeatingMaintainChargeRecord2015 charge(Long recordId, 
 			Double actualCharge,
-			boolean gratis,
 			String wageNum,
 			String remarks);
 	
