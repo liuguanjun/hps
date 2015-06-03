@@ -3,6 +3,7 @@ package org.appfuse.service.hps.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.appfuse.dao.hps.HpsBaseDao;
 import org.appfuse.dao.hps.HpsHeatingMaintainCharge2015Dao;
 import org.appfuse.service.hps.HpsHeatingMaintain2015ChargeManager;
@@ -124,7 +125,24 @@ public class HpsHeatingMaintain2015ChargeManagerImpl extends GenericManagerImpl<
     @Override
     @Transactional
     public HpsHeatingMaintainChargeRecord2015 cancel(Long recordId, String remarks) {
-        return null;
+        HpsHeatingMaintainChargeRecord2015 record = concreteDao.get(recordId);
+        
+        HpsHeatingMaintainChargeRecord2015 unchargedNewRecord = null;
+        try {
+            unchargedNewRecord = (HpsHeatingMaintainChargeRecord2015) BeanUtils.cloneBean(record);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        unchargedNewRecord.setId(null);
+        unchargedNewRecord.setChargeState(ChargeStateEnum.UNCHARGED);
+        unchargedNewRecord.setChargeDate(null);
+        unchargedNewRecord.setOperUser(null);
+        concreteDao.save(unchargedNewRecord);
+        
+        record.setChargeState(ChargeStateEnum.CANCELLED);
+        record.setCancelledCause(remarks);
+        concreteDao.save(record);
+        return record;
     }
 
     @Override

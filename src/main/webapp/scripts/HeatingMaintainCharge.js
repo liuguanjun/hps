@@ -45,7 +45,7 @@ function cancel() {
 	if ($('#cancelChargeForm').form('validate')) {
 		var recordId = $('#cancelRecordId').val();
 		$('#cancelChargeForm').form("submit", {
-			url : "${ctx}/heatingcharge/" + recordId + "/cancel",
+			url : "${ctx}/heatingmaintain2015/" + recordId + "/cancel",
 			success : function(data) {
 				if (typeof data == "string") {
 					var dataObj = $.parseJSON(data);  

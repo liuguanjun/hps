@@ -82,5 +82,13 @@ public class HeatingMaintain2015Controller extends BaseFormController {
         HpsHeatingMaintainChargeRecord2015 record = manager.charge(recordId, actualCharge, wageNum, remarks);
         return record;
     }
+    
+    @RequestMapping(method = RequestMethod.PUT, value = "{recordId}/cancel")
+    @ResponseBody
+    public HpsHeatingMaintainChargeRecord2015 cancel(@PathVariable Long recordId, 
+                @RequestParam(required = false, defaultValue = "") String remarks) {
+        HpsHeatingMaintainChargeRecord2015 record = manager.cancel(recordId, remarks);
+        return record;
+    }
 
 }

@@ -326,6 +326,8 @@ public class HpsHeatingChargeManagerImpl extends GenericManagerImpl<HpsHeatingCh
 		}
 		unchargedNewRecord.setId(null);
 		unchargedNewRecord.setChargeState(ChargeStateEnum.UNCHARGED);
+		unchargedNewRecord.setChargeDate(null);
+		unchargedNewRecord.setOperUser(null);
 		chargeDao.save(unchargedNewRecord);
 		
 		record.setChargeState(ChargeStateEnum.CANCELLED);
