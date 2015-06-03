@@ -7,6 +7,7 @@
         <pattern>/QunuanfeiChargePrint</pattern>
         <pattern>/HouseRepairChargePrint</pattern>
         <pattern>/ElectricChargePrint*</pattern>
+        <pattern>/HeatingMaintainChargePrint</pattern>
     </excludes> 
     <decorator name="default" page="default.jsp">
         <pattern>/*</pattern>

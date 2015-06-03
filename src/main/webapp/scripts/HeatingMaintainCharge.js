@@ -37,7 +37,7 @@ function openPrintDialog(recordId) {
 			return;
 		}
 	}
-	window.showModalDialog("${ctx}/QunuanfeiChargePrint",
+	window.showModalDialog("${ctx}/HeatingMaintainChargePrint",
 			recordId, "dialogWidth=800px;dialogHeight=400px;status:no;center:yes");
 }
 
