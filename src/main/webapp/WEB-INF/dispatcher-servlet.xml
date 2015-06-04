@@ -56,6 +56,7 @@
     <mvc:view-controller path="/HouseRepairChargePrint" view-name="HouseRepairChargePrint"/>
     <mvc:view-controller path="/HouseRepairCharge" view-name="HouseRepairCharge"/>
     <mvc:view-controller path="/ElectricTongji" view-name="ElectricTongji"/>
+    <mvc:view-controller path="/HeatingMaintainChargeTongji" view-name="HeatingMaintainChargeTongji"/>
     <mvc:view-controller path="/QunuanfeiTongji" view-name="QunuanfeiTongji"/>
     <mvc:view-controller path="/WeixiufeiTongji" view-name="WeixiufeiTongji"/>
     <mvc:view-controller path="/ElectricTongji" view-name="ElectricTongji"/>

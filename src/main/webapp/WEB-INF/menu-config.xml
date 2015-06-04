@@ -39,7 +39,7 @@
         
         <Menu name="HeatingMaintain" title="供暖改造" roles="ROLE_SUPERADMIN,ROLE_ADMIN,ROLE_USER">
             <Item name="HeatingMaintainCharge" title="供暖改造缴费" page="/HeatingMaintainCharge"/>
-            <Item name="HeatingMaintainTongji" title="供暖改造费统计报表" page="/HeatingMaintainTongji"/>
+            <Item name="HeatingMaintainChargeTongji" title="供暖改造费统计报表" page="HeatingMaintainChargeTongji"/>
         </Menu>
         
 <!--         <Menu name="AppFuseSample" title="AppFuse 示例" description="Admin Menu" roles="ROLE_SUPERADMIN"> -->
