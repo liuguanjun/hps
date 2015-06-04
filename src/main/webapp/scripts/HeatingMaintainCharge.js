@@ -278,12 +278,10 @@ function clearHeatingQuery() {
 	$('#danyuan_q').val("");
 	$('#louceng_q').val("");
 	$('#ownerName_q').val("");
-	$('#shenfenXingzhi_q').combobox("select", COMBOBOX_DEFAULT_SEL_VAL);
 	$('#recordRemarks_q').val("");
 	$('#paymentDateId_q').combobox("select", COMBOBOX_DEFAULT_SEL_VAL);
 	$('#ownerNo_q').val("");
 	$('#wageNum_q').val("")
-	$('#yongfangXingzhi_q').combobox("select", COMBOBOX_DEFAULT_SEL_VAL);
 	$('#chargeState_q').combobox("select", COMBOBOX_DEFAULT_SEL_VAL);
 }
 
@@ -326,25 +324,17 @@ function setQueryParams(params) {
 function exportHeatingReport() {
 	var params = {};
 	setQueryParams(params);
-	if (!params.paymentDateId) {
-		return;
-	}
-//	$.ajax({
-//		url: ctx + '/report/heating',
-//		type : "get",
-//		data : params
-//	});
 	var form = $("<form>");   //定义一个form表单
     form.attr('style','display:none');   //在form表单中添加查询参数
     form.attr('target','');
     form.attr('method','get');
-    form.attr('action', ctx + '/report/heatingall');
+    form.attr('action', ctx + '/report/heatingmaintainall');
    
-    var inputPaymentDate = $('<input>'); 
-    inputPaymentDate.attr('type','hidden'); 
-    inputPaymentDate.attr('name','paymentDateId'); 
-    inputPaymentDate.attr('value',params.paymentDateId);
-    form.append(inputPaymentDate);   //将查询参数控件提交到表单上
+    var inputBaseCode = $('<input>'); 
+    inputBaseCode.attr('type','hidden'); 
+    inputBaseCode.attr('name','baseCode'); 
+    inputBaseCode.attr('value',params.baseCode);
+    form.append(inputBaseCode);   //将查询参数控件提交到表单上
     
     var inputareaCode = $('<input>'); 
     inputareaCode.attr('type','hidden'); 
@@ -376,18 +366,6 @@ function exportHeatingReport() {
     inputownerName.attr('value',params.ownerName);
     form.append(inputownerName);   //将查询参数控件提交到表单上
     
-    var inputshenfenXingzhiCode = $('<input>'); 
-    inputshenfenXingzhiCode.attr('type','hidden'); 
-    inputshenfenXingzhiCode.attr('name','shenfenXingzhiCode'); 
-    inputshenfenXingzhiCode.attr('value',params.shenfenXingzhiCode);
-    form.append(inputshenfenXingzhiCode);   //将查询参数控件提交到表单上
-    
-    var inputyongfangXingzhiCode = $('<input>'); 
-    inputyongfangXingzhiCode.attr('type','hidden'); 
-    inputyongfangXingzhiCode.attr('name','yongfangXingzhiCode'); 
-    inputyongfangXingzhiCode.attr('value',params.yongfangXingzhiCode);
-    form.append(inputyongfangXingzhiCode);
-    
     var inputchargeState = $('<input>'); 
     inputchargeState.attr('type','hidden'); 
     inputchargeState.attr('name','chargeState'); 
@@ -417,24 +395,6 @@ function exportHeatingReport() {
     inputhouseNo.attr('name','houseNo'); 
     inputhouseNo.attr('value',params.houseNo);
     form.append(inputhouseNo);
-    
-    var inputdiverted = $('<input>'); 
-    inputdiverted.attr('type','hidden'); 
-    inputdiverted.attr('name','diverted'); 
-    inputdiverted.attr('value',params.diverted);
-    form.append(inputdiverted);
-    
-    var inputstopped = $('<input>'); 
-    inputstopped.attr('type','hidden'); 
-    inputstopped.attr('name','stopped'); 
-    inputstopped.attr('value',params.stopped);
-    form.append(inputstopped);
-    
-    var inputlivingSohard = $('<input>'); 
-    inputlivingSohard.attr('type','hidden'); 
-    inputlivingSohard.attr('name','livingSohard'); 
-    inputlivingSohard.attr('value',params.livingSohard);
-    form.append(inputlivingSohard);
     
     var inputwageNum = $('<input>'); 
     inputwageNum.attr('type','hidden'); 

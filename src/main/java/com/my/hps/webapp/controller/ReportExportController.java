@@ -10,6 +10,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +25,8 @@ import net.sf.jasperreports.export.SimpleXlsxReportConfiguration;
 
 import org.apache.commons.lang3.StringUtils;
 import org.appfuse.dao.DBConnectionFacotry;
+import org.appfuse.service.hps.HpsHeatingMaintain2015ChargeManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,8 +35,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.my.hps.webapp.controller.queryparam.ElectricTongjiQueryParam;
 import com.my.hps.webapp.controller.queryparam.HeatingChargeQueryParam;
+import com.my.hps.webapp.controller.queryparam.HeatingMaintainCharge2015QueryParam;
 import com.my.hps.webapp.controller.queryparam.QunuanfeiTongjiQueryParam;
 import com.my.hps.webapp.controller.queryparam.WeixiufeiTongjiQueryParam;
+import com.my.hps.webapp.model.HpsHeatingMaintainPaymentDate2015;
 import com.my.hps.webapp.model.enums.ChargeStateEnum;
 
 /**
@@ -52,6 +57,91 @@ public class ReportExportController extends BaseFormController {
     private static final String REPORT_CONFIG_FILE_CATEGORY_MAINTAIN = "/../reports/maintain_charge_record_final";
     
     private static final String REPORT_CONFIG_FILE_CATEGORY_HEATING_ALL = "/../reports/heating_charge_record_all";
+    private static final String REPORT_CONFIG_FILE_HEATING_MAINTAIN = "/../reports/heating_maintain_charge_record_all";
+    
+    private HpsHeatingMaintain2015ChargeManager manager;
+
+    @Autowired
+    public void setWHeatingMaintainManager(HpsHeatingMaintain2015ChargeManager manager) {
+        this.manager = manager;
+    }
+    
+    @RequestMapping(method = RequestMethod.GET, value = "heatingmaintainall")
+    @ResponseBody
+    public void exportHeatingMaintainChargeAllRecords(@ModelAttribute HeatingMaintainCharge2015QueryParam param, HttpServletResponse response) {
+        Map<String, Object> params = new HashMap<String, Object>();
+        
+        String baseCode = param.getBaseCode();
+        List<HpsHeatingMaintainPaymentDate2015> allPaymentDates = manager.getPaymentDates();
+        HpsHeatingMaintainPaymentDate2015 currentPaymentDate = null;
+        for (HpsHeatingMaintainPaymentDate2015 paymentDate : allPaymentDates) {
+            if (paymentDate.getBase().getCode().equals(baseCode)) {
+                currentPaymentDate = paymentDate;
+                break;
+            }
+        }
+        
+        // 缴费年份
+        params.put("paymentdate_id", currentPaymentDate.getId());
+        // 缴费日期
+        String chargeDate = param.getChargeDate();
+        if (StringUtils.isNotEmpty(chargeDate)) {
+            params.put("charge_date", chargeDate);
+        }
+        // 收费员
+        String operName = param.getOperName();
+        if (StringUtils.isNotEmpty(operName)) {
+            params.put("oper_name", operName);
+        }
+        String areaCode = param.getAreaCode();
+        if (StringUtils.isNotEmpty(areaCode)) {
+            // 区域有选择
+            params.put("area_code", areaCode);
+        }
+        String ownerName = param.getOwnerName();
+        if (StringUtils.isNotEmpty(ownerName)) {
+            params.put("owner_name", ownerName);
+        }
+        String houseNo = param.getHouseNo();
+        if (StringUtils.isNotEmpty(houseNo)) {
+            params.put("house_no", houseNo);
+        }
+        String louzuoCode = param.getLouzuoCode();
+        if (StringUtils.isNotEmpty(louzuoCode)) {
+            params.put("louzuo", louzuoCode);
+        }
+        String danyuan = param.getDanyuan();
+        if (StringUtils.isNotEmpty(danyuan)) {
+            params.put("danyuan", danyuan);
+        }
+        String ceng = param.getCeng();
+        if (StringUtils.isNotEmpty(ceng)) {
+            params.put("ceng", ceng);
+        }
+        String remark = param.getRecordRemarks();
+        if (StringUtils.isNotEmpty(remark)) {
+            params.put("charge_record_remark", remark);
+        }
+        String wageNum = param.getWageNum();
+        if (StringUtils.isNotEmpty(wageNum)) {
+            params.put("wage_num", wageNum);
+        }
+        String chargeState = param.getChargeState();
+        if (StringUtils.isNotEmpty(chargeState)) {
+            int chargeStateInt = ChargeStateEnum.valueOf(chargeState).ordinal();
+            params.put("charge_state", chargeStateInt + "");
+        }
+        File reportFile = null;
+        try {
+            reportFile = exportReportFile(REPORT_CONFIG_FILE_HEATING_MAINTAIN, params);
+            downloadFileToResponce(reportFile, response);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (reportFile != null)
+                reportFile.delete();
+        }
+    }
     
     @RequestMapping(method = RequestMethod.GET, value = "heatingall")
     @ResponseBody
