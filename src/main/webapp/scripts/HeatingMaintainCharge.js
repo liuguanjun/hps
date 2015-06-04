@@ -272,14 +272,14 @@ function livingSohardOnClick() {
 }
 
 function clearHeatingQuery() {
-	$('#base_q').combobox("select", COMBOBOX_DEFAULT_SEL_VAL);
+	//$('#base_q').combobox("select", COMBOBOX_DEFAULT_SEL_VAL);
 	$('#area_q').combobox("select", COMBOBOX_DEFAULT_SEL_VAL);
 	$('#louzuo_q').combobox("select", COMBOBOX_DEFAULT_SEL_VAL);
 	$('#danyuan_q').val("");
 	$('#louceng_q').val("");
 	$('#ownerName_q').val("");
 	$('#recordRemarks_q').val("");
-	$('#paymentDateId_q').combobox("select", COMBOBOX_DEFAULT_SEL_VAL);
+	//$('#paymentDateId_q').combobox("select", COMBOBOX_DEFAULT_SEL_VAL);
 	$('#ownerNo_q').val("");
 	$('#wageNum_q').val("")
 	$('#chargeState_q').combobox("select", COMBOBOX_DEFAULT_SEL_VAL);

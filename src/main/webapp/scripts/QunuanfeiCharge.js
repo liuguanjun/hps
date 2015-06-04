@@ -298,7 +298,7 @@ function livingSohardOnClick() {
 }
 
 function clearHeatingQuery() {
-	$('#base_q').combobox("select", COMBOBOX_DEFAULT_SEL_VAL);
+	//$('#base_q').combobox("select", COMBOBOX_DEFAULT_SEL_VAL);
 	$('#area_q').combobox("select", COMBOBOX_DEFAULT_SEL_VAL);
 	$('#louzuo_q').combobox("select", COMBOBOX_DEFAULT_SEL_VAL);
 	$('#danyuan_q').val("");
