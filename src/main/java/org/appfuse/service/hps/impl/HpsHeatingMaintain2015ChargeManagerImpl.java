@@ -1,11 +1,15 @@
 package org.appfuse.service.hps.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.appfuse.dao.hps.HpsBaseDao;
 import org.appfuse.dao.hps.HpsHeatingMaintainCharge2015Dao;
+import org.appfuse.service.hps.HpsDictManager;
 import org.appfuse.service.hps.HpsHeatingMaintain2015ChargeManager;
 import org.appfuse.service.hps.HpsHouseManager;
 import org.appfuse.service.impl.GenericManagerImpl;
@@ -14,13 +18,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.my.hps.webapp.controller.queryparam.HeatingMaintainCharge2015QueryParam;
+import com.my.hps.webapp.controller.queryparam.HeatingMaintainTongjiQueryParam;
 import com.my.hps.webapp.controller.queryparam.HouseQueryParam;
+import com.my.hps.webapp.controller.vo.HpsElectricUserTongjiRowView;
+import com.my.hps.webapp.controller.vo.HpsHeatingMaintainUserTongjiRowView;
 import com.my.hps.webapp.exception.PaymentDateNotExistsException;
 import com.my.hps.webapp.model.HeatingMaintainChargeRecordPaginationResult2015;
 import com.my.hps.webapp.model.HpsBase;
+import com.my.hps.webapp.model.HpsElectricChaobiao;
+import com.my.hps.webapp.model.HpsElectricChargeRecord;
 import com.my.hps.webapp.model.HpsHeatingMaintainChargeRecord2015;
 import com.my.hps.webapp.model.HpsHeatingMaintainPaymentDate2015;
 import com.my.hps.webapp.model.HpsHouse;
+import com.my.hps.webapp.model.HpsUser;
 import com.my.hps.webapp.model.enums.ChargeStateEnum;
 import com.my.hps.webapp.util.SecurityUtil;
 
@@ -191,6 +201,37 @@ public class HpsHeatingMaintain2015ChargeManagerImpl extends GenericManagerImpl<
             }
         }
         throw new PaymentDateNotExistsException();
+    }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public List<HpsHeatingMaintainUserTongjiRowView> getUserTongjiRowList(HeatingMaintainTongjiQueryParam param) {
+        param.setPage(1);
+        param.setRows(Integer.MAX_VALUE);
+        List<HpsHeatingMaintainChargeRecord2015> records = concreteDao.getChargeRecords(param).getRows();
+        List<HpsHeatingMaintainUserTongjiRowView> result = new ArrayList<HpsHeatingMaintainUserTongjiRowView>();
+        Map<Long, HpsHeatingMaintainUserTongjiRowView> viewMap = new HashMap<Long, HpsHeatingMaintainUserTongjiRowView>();
+        for (HpsHeatingMaintainChargeRecord2015 record : records) {
+            HpsUser operUser = record.getOperUser();
+            Long operUserId = operUser.getId();
+            HpsHeatingMaintainUserTongjiRowView userView = viewMap.get(operUserId);
+            if (userView == null) {
+                userView = new HpsHeatingMaintainUserTongjiRowView();
+                userView.setOperUser(operUser);
+                userView.setOperName(operUser.getUserName());
+                viewMap.put(operUserId, userView);
+            }
+            double actualCharge = userView.getActualCharge();
+            actualCharge += record.getActualCharge();
+            userView.setActualCharge(actualCharge);
+            double mustCharge = userView.getMustCharge();
+            mustCharge += record.getMustCharge();
+            userView.setMustCharge(mustCharge);
+            int houseCount = userView.getHouseCount();
+            userView.setHouseCount(++houseCount);
+        }
+        result.addAll(viewMap.values());
+        return result;
     }
 
 

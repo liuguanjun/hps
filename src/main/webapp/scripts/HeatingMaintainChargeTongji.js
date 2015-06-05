@@ -45,43 +45,6 @@ function loadCaozuoyuan(node) {
 	});
 }
 
-/*
-function loadPaymentDateCombobox(node) {
-	var baseCode = node.baseCode;
-	// 基地没有选择时，不加载缴费年费下拉列表
-	$.ajax({
-		url: ctx + '/admin/electricPaymentDate/' + baseCode + "/paymentdates",
-		type : "get",
-		success: function(data) {
-			$("#startMonth_q").combobox({
-				valueField:'id',    
-			    textField:'monthFormatStr',
-			    data: eval(JSON.stringify(data)),
-			    onLoadSuccess : function(data) {
-			    	// 没有查询到数据，选中默认选项
-			    	if (!data || !data[0]) {
-			    		return;
-			    	}
-			    	$(this).combobox("setValue", data[0].id);
-			    }
-			});
-			$("#endMonth_q").combobox({
-				valueField:'id',    
-			    textField:'monthFormatStr',
-			    data: eval(JSON.stringify(data)),
-			    onLoadSuccess : function(data) {
-			    	// 没有查询到数据，选中默认选项
-			    	if (!data || !data[0]) {
-			    		return;
-			    	}
-			    	$(this).combobox("setValue", data[0].id);
-			    }
-			});
-			monthInitialized = true;
-		}
-	});
-}*/
-
 function formatTreeNode(node) {
 	return node.name;
 }
@@ -105,14 +68,6 @@ function setQueryParams(params) {
 	if (!selectedNode.base) {
 		params.areaCode = selectedNode.code;
 	}
-//	var startPaymentDateId = $('#startMonth_q').combobox("getValue");
-//	if (startPaymentDateId && startPaymentDateId != COMBOBOX_DEFAULT_SEL_VAL) {
-//		params.startPaymentDateId = startPaymentDateId;
-//	}
-//	var endPaymentDateId = $('#endMonth_q').combobox("getValue");
-//	if (endPaymentDateId && endPaymentDateId != COMBOBOX_DEFAULT_SEL_VAL) {
-//		params.endPaymentDateId = endPaymentDateId;
-//	}
 	var startChargeTime = $('#startTime_q').datetimebox('getValue');
 	if (startChargeTime) {
 		params.startChargeTime = startChargeTime;
@@ -125,7 +80,6 @@ function setQueryParams(params) {
 	if (operUserId && operUserId != COMBOBOX_DEFAULT_SEL_VAL) {
 		params.operUserId = operUserId;
 	}
-	$("#toolbarSearchChargeRecord").linkbutton("disable");
 	return true;
 }
 
@@ -135,11 +89,6 @@ function exportElectricReport() {
 	if (!params.baseCode) {
 		return;
 	}
-//	$.ajax({
-//		url: ctx + '/report/heating',
-//		type : "get",
-//		data : params
-//	});
 	var form = $("<form>");   //定义一个form表单
     form.attr('style','display:none');   //在form表单中添加查询参数
     form.attr('target','');
@@ -185,7 +134,7 @@ function searchTongjiInfo() {
 }
 
 function userTongjiRowOnCheck() {
-	$("#toolbarSearchChargeRecord").linkbutton("enable");
+	//$("#toolbarSearchChargeRecord").linkbutton("enable");
 }
 
 function getProvReadoutsElectricValue(value, rowData, rowIndex) {

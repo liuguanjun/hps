@@ -48,8 +48,8 @@
 	   </div>
 	</div>
 	<div  class="easyui-layout" style="padding-top:5px">
-	<table id="data_grid" class="easyui-datagrid"  title="电费统计结果" 
-			data-options="url:'${ctx}/elecharge/usertongjiresult',
+	<table id="data_grid" class="easyui-datagrid"  title="供暖改造缴费统计结果" 
+			data-options="url:'${ctx}/heatingmaintain2015/usertongjiresult',
 			singleSelect:true,
 			collapsible:true,
 			method:'get',
@@ -60,15 +60,7 @@
 			                             $('#toolbarExport').linkbutton('enable');
 			                           } 
 			                         },
-			toolbar: [
-				    {
-				       id : 'toolbarSearchChargeRecord',
-					   iconCls: 'icon-search',
-					   text:'查看缴费记录',
-					   handler:function() { openChargeRecordsDialog(); },
-					   
-				    }, '-' ,
-				    {
+			toolbar: [{
 				       id : 'toolbarExport',
 					   iconCls: 'icon-print',
 					   text:'导出缴费记录',
@@ -78,15 +70,9 @@
 		<thead>
 			<tr>
 				<th data-options="field:'operName',width:110,align:'center'">操作员</th>
-				<th data-options="field:'electricCharge',width:100,align:'center'">电费</th>
-				<th data-options="field:'electricCount',width:100,align:'center'">电量</th>
-				<th data-options="field:'zhinajin',width:100,align:'center'">滞纳金</th>
-				<th data-options="field:'weishengfei',width:100,align:'center'">卫生费</th>
-				<th data-options="field:'paiwufei',width:100,align:'center'">排污费</th>
-				<th data-options="field:'zhaomingfei',width:100,align:'center'">照明费</th>
-				<th data-options="field:'actualCharge',width:100,align:'center'">实际收取合计</th>
-				<th data-options="field:'juminMonthCount',width:100,align:'center'">居民累计月数</th>
-				<th data-options="field:'receiptCnt',width:100,align:'center'">理论收据张数</th>
+				<th data-options="field:'mustCharge',width:120,align:'center'">应收合计</th>
+				<th data-options="field:'actualCharge',width:120,align:'center'">实收合计</th>
+				<th data-options="field:'houseCount',width:100,align:'center'">户数</th>
 			</tr>
 		</thead>
 	</table>

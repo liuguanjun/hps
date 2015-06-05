@@ -5,6 +5,8 @@ import java.util.List;
 import org.appfuse.service.GenericManager;
 
 import com.my.hps.webapp.controller.queryparam.HeatingMaintainCharge2015QueryParam;
+import com.my.hps.webapp.controller.queryparam.HeatingMaintainTongjiQueryParam;
+import com.my.hps.webapp.controller.vo.HpsHeatingMaintainUserTongjiRowView;
 import com.my.hps.webapp.model.HeatingMaintainChargeRecordPaginationResult2015;
 import com.my.hps.webapp.model.HpsHeatingMaintainChargeRecord2015;
 import com.my.hps.webapp.model.HpsHeatingMaintainPaymentDate2015;
@@ -34,5 +36,7 @@ public interface HpsHeatingMaintain2015ChargeManager extends GenericManager<HpsH
 			String remarks);
 	
 	HpsHeatingMaintainChargeRecord2015 cancel(Long recordId, String remarks);
+
+    List<HpsHeatingMaintainUserTongjiRowView> getUserTongjiRowList(HeatingMaintainTongjiQueryParam param);
 
 }

@@ -1,5 +1,7 @@
 package org.appfuse.dao.hps.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,11 +15,11 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.my.hps.webapp.controller.queryparam.HeatingMaintainCharge2015QueryParam;
-import com.my.hps.webapp.model.HeatingChargeRecordPaginationResult;
+import com.my.hps.webapp.controller.queryparam.HeatingMaintainTongjiQueryParam;
 import com.my.hps.webapp.model.HeatingMaintainChargeRecordPaginationResult2015;
 import com.my.hps.webapp.model.HpsHeatingMaintainChargeRecord2015;
 import com.my.hps.webapp.model.HpsHeatingMaintainPaymentDate2015;
-import com.my.hps.webapp.model.HpsHeatingShenfenXingzhiPreferential;
+import com.my.hps.webapp.model.PaginationResult;
 import com.my.hps.webapp.model.enums.ChargeStateEnum;
 
 @Repository
@@ -174,6 +176,57 @@ public class HpsHeatingMaintainCharge2015DaoHibernate extends HpsGenericDaoHiber
         Criteria c = createCriteria(HpsHeatingMaintainChargeRecord2015.class);
         c.add(Restrictions.eq("house.id", houseId));
         return (HpsHeatingMaintainChargeRecord2015) c.uniqueResult();
+    }
+    
+    @Override
+    public PaginationResult<HpsHeatingMaintainChargeRecord2015> getChargeRecords(
+            HeatingMaintainTongjiQueryParam param) {
+        String hql = "from HpsHeatingMaintainChargeRecord2015 where house.louzuo.area.base.code = :baseCode and chargeState = :chargeState";
+        Map<String, Object> hqlParams = new HashMap<String, Object>();
+        hqlParams.put("baseCode", param.getBaseCode());
+        hqlParams.put("chargeState", ChargeStateEnum.CHARGED);
+        String areaCode = param.getAreaCode();
+        if (StringUtils.isNotEmpty(areaCode)) {
+            hql += " and house.louzuo.area.code = :areaCode";
+            hqlParams.put("areaCode", areaCode);
+        }
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String startTime = param.getStartChargeTime();
+        if (StringUtils.isNotEmpty(startTime)) {
+            hql += " and chargeDate >= :startTime";
+            try {
+                hqlParams.put("startTime", format.parse(startTime));
+            } catch (ParseException e) {
+            }
+        }
+        String endTime = param.getEndChargeTime();
+        if (StringUtils.isNotEmpty(startTime)) {
+            hql += " and chargeDate <= :endTime";
+            try {
+                hqlParams.put("endTime", format.parse(endTime));
+            } catch (ParseException e) {
+            }
+        }
+        Long operUserIdParam = param.getOperUserId();
+        if (operUserIdParam != null) {
+            hql += " and operUser.id = :operUserId";
+            hqlParams.put("operUserId", operUserIdParam);
+        }
+        Query query = createQuery(hql + " order by chargeDate desc");
+        Query queryCnt = createQuery("select count (id) " + hql);
+        for (Map.Entry<String, Object> paramEntry : hqlParams.entrySet()) {
+            query.setParameter(paramEntry.getKey(), paramEntry.getValue());
+            queryCnt.setParameter(paramEntry.getKey(), paramEntry.getValue());
+        }
+        query.setFirstResult(param.getOffset());
+        query.setMaxResults(param.getRows());
+        @SuppressWarnings("unchecked")
+        List<HpsHeatingMaintainChargeRecord2015> records = query.list();
+        PaginationResult<HpsHeatingMaintainChargeRecord2015> result = new PaginationResult<HpsHeatingMaintainChargeRecord2015>();
+        result.setRows(records);
+        Long cntLong = (Long) queryCnt.uniqueResult();
+        result.setTotal(cntLong.intValue());
+        return result;
     }
 
 

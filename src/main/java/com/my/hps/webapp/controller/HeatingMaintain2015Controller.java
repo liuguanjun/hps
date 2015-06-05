@@ -1,5 +1,6 @@
 package com.my.hps.webapp.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.appfuse.service.hps.HpsHeatingMaintain2015ChargeManager;
@@ -13,8 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.my.hps.webapp.controller.queryparam.HeatingMaintainCharge2015QueryParam;
+import com.my.hps.webapp.controller.queryparam.HeatingMaintainTongjiQueryParam;
+import com.my.hps.webapp.controller.vo.HpsElectricUserTongjiRowView;
+import com.my.hps.webapp.controller.vo.HpsElectricUserTongjiView;
+import com.my.hps.webapp.controller.vo.HpsHeatingMaintainUserTongjiRowView;
+import com.my.hps.webapp.controller.vo.HpsHeatingMaintainUserTongjiView;
 import com.my.hps.webapp.model.HeatingMaintainChargeRecordPaginationResult2015;
-import com.my.hps.webapp.model.HpsHeatingChargeRecord;
 import com.my.hps.webapp.model.HpsHeatingMaintainChargeRecord2015;
 import com.my.hps.webapp.model.HpsHeatingMaintainPaymentDate2015;
 import com.my.hps.webapp.util.SecurityUtil;
@@ -89,6 +94,39 @@ public class HeatingMaintain2015Controller extends BaseFormController {
                 @RequestParam(required = false, defaultValue = "") String remarks) {
         HpsHeatingMaintainChargeRecord2015 record = manager.cancel(recordId, remarks);
         return record;
+    }
+    
+    @RequestMapping(method = RequestMethod.GET, value = "usertongjiresult")
+    @ResponseBody
+    public HpsHeatingMaintainUserTongjiView getUserTongjiResult(@ModelAttribute HeatingMaintainTongjiQueryParam param) {
+        List<HpsHeatingMaintainUserTongjiRowView> rows = manager.getUserTongjiRowList(param);
+        HpsHeatingMaintainUserTongjiView result = new HpsHeatingMaintainUserTongjiView();
+        result.setRows(rows);
+        List<HpsHeatingMaintainUserTongjiRowView> footer = new ArrayList<HpsHeatingMaintainUserTongjiRowView>();
+        HpsHeatingMaintainUserTongjiRowView footerRow = new HpsHeatingMaintainUserTongjiRowView();
+        footerRow.setOperUser(null);
+        footerRow.setOperName("合计：");
+        double actualCharge = 0;
+        double mustCharge = 0;
+        int houseCount = 0;
+        for (HpsHeatingMaintainUserTongjiRowView row : rows) {
+            Double rowActualCharge = row.getActualCharge();
+            if (rowActualCharge != null) {
+                actualCharge += rowActualCharge;
+            }
+            Double rowMustCharge = row.getMustCharge();
+            if (rowMustCharge != null) {
+                mustCharge += rowMustCharge;
+            }
+            int rowHouseCount = row.getHouseCount();
+            houseCount += rowHouseCount;
+        }
+        footerRow.setActualCharge(actualCharge);
+        footerRow.setMustCharge(mustCharge);
+        footerRow.setHouseCount(houseCount);
+        footer.add(footerRow);
+        result.setFooter(footer);
+        return result;
     }
 
 }
