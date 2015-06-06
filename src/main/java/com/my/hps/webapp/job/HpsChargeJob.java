@@ -1,5 +1,9 @@
 package com.my.hps.webapp.job;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 import org.appfuse.service.hps.HpsElectricChaobiaoManager;
 import org.appfuse.service.hps.HpsElectricPaymentDateManager;
 import org.appfuse.service.hps.HpsHeatingChargeManager;
@@ -9,8 +13,6 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
-import com.my.hps.webapp.model.HpsElectricPaymentDate;
 
 @Component
 public class HpsChargeJob implements InitializingBean {
@@ -60,6 +62,21 @@ public class HpsChargeJob implements InitializingBean {
     @Override
 	public void afterPropertiesSet() throws Exception {
 		initChargeRecords();
+		backupDbData();
 	}
+    
+    private void backupDbData() {
+        Properties prop = new Properties();   
+        InputStream in = HpsChargeJob.class.getResourceAsStream("/hps_config.properites");
+        String exeFileName = null;
+        try {
+            prop.load(in);   
+            exeFileName = prop.getProperty("backup_exe_file_path").trim();
+            Runtime.getRuntime().exec(exeFileName);
+        } catch (IOException e) {   
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }   
+    }
     
 }
