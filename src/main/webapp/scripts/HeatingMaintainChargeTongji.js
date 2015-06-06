@@ -79,7 +79,7 @@ function setQueryParams(params) {
 	var operUserId = $('#hpsUser_q').combobox("getValue");
 	if (operUserId && operUserId != COMBOBOX_DEFAULT_SEL_VAL) {
 		params.operUserId = operUserId;
-	}
+	} 
 	return true;
 }
 
