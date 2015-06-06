@@ -9,7 +9,7 @@
     <div class="easyui-layout" style="height: 500px;">
     <div data-options="region:'west',split:true,title:'区域导航'" style="width:170px;">
        <ul id="baseTree" class="easyui-tree" 
-           data-options="url:'${ctx}/admin/BaseManagement/baseTreeElements',
+           data-options="url:'${ctx}/admin/BaseManagement/baseTreeElementsOfHeatingMaintain',
 			method:'get',
 			formatter:formatTreeNode,
 			onLoadSuccess : selectFirstNode,

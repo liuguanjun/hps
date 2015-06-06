@@ -36,6 +36,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.my.hps.webapp.controller.queryparam.ElectricTongjiQueryParam;
 import com.my.hps.webapp.controller.queryparam.HeatingChargeQueryParam;
 import com.my.hps.webapp.controller.queryparam.HeatingMaintainCharge2015QueryParam;
+import com.my.hps.webapp.controller.queryparam.HeatingMaintainTongjiQueryParam;
 import com.my.hps.webapp.controller.queryparam.QunuanfeiTongjiQueryParam;
 import com.my.hps.webapp.controller.queryparam.WeixiufeiTongjiQueryParam;
 import com.my.hps.webapp.model.HpsHeatingMaintainPaymentDate2015;
@@ -293,6 +294,50 @@ public class ReportExportController extends BaseFormController {
         File reportFile = null;
         try {
             reportFile = exportReportFile(REPORT_CONFIG_FILE_CATEGORY_ELECTRIC, params);
+            downloadFileToResponce(reportFile, response);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (reportFile != null)
+                reportFile.delete();
+        }
+    }
+    
+    @RequestMapping(method = RequestMethod.GET, value = "heatingmaintaintongji")
+    @ResponseBody
+    public void exportHeatingMaintainChargeRecords(@ModelAttribute HeatingMaintainTongjiQueryParam param, HttpServletResponse response) {
+        Map<String, Object> params = new HashMap<String, Object>();
+        String baseCode = param.getBaseCode();
+        List<HpsHeatingMaintainPaymentDate2015> allPaymentDates = manager.getPaymentDates();
+        HpsHeatingMaintainPaymentDate2015 currentPaymentDate = null;
+        for (HpsHeatingMaintainPaymentDate2015 paymentDate : allPaymentDates) {
+            if (paymentDate.getBase().getCode().equals(baseCode)) {
+                currentPaymentDate = paymentDate;
+                break;
+            }
+        }
+        
+        // 缴费年份
+        params.put("paymentdate_id", currentPaymentDate.getId());
+        String areaCode = param.getAreaCode();
+        if (StringUtils.isNotEmpty(areaCode)) {
+            params.put("area_code", areaCode);
+        }
+        String startChargeTime = param.getStartChargeTime();
+        if (StringUtils.isNotEmpty(startChargeTime)) {
+            params.put("charge_start_date", startChargeTime);
+        }
+        String endChargeTime = param.getEndChargeTime();
+        if (StringUtils.isNotEmpty(endChargeTime)) {
+            params.put("charge_end_date", endChargeTime);
+        }
+        Long operId = param.getOperUserId();
+        if (operId != null) {
+            params.put("oper_id", operId);
+        }
+        File reportFile = null;
+        try {
+            reportFile = exportReportFile(REPORT_CONFIG_FILE_HEATING_MAINTAIN, params);
             downloadFileToResponce(reportFile, response);
         } catch (Exception e) {
             throw new RuntimeException(e);

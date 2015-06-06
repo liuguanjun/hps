@@ -34,6 +34,20 @@ public class BaseManagementController extends BaseFormController {
 		return convertBases(bases);
 	}
 	
+    @RequestMapping(method = RequestMethod.GET, value = "baseTreeElementsOfHeatingMaintain")
+    @ResponseBody
+    public List<HpsBaseTreeElement> getBaseTreeElementsOfHeatingMaintain() {
+        List<HpsBase> bases = hpsBaseManager.getBases();
+        List<HpsBase> resultBases = new ArrayList<HpsBase>();
+        for (HpsBase base : bases) {
+            if (!base.getId().equals(4l)) {
+                // 去除旅顺
+                resultBases.add(base);
+            }
+        }
+        return convertBases(resultBases);
+    }
+	
 	/**
 	 * 删除被选中的区域数据
 	 * @return List

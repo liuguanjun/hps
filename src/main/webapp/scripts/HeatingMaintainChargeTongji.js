@@ -93,7 +93,7 @@ function exportElectricReport() {
     form.attr('style','display:none');   //在form表单中添加查询参数
     form.attr('target','');
     form.attr('method','get');
-    form.attr('action', ctx + '/report/electric');
+    form.attr('action', ctx + '/report/heatingmaintaintongji');
    
     var inputBaseCode = $('<input>'); 
     inputBaseCode.attr('type','hidden'); 
