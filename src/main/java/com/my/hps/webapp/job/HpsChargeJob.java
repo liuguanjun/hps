@@ -33,7 +33,7 @@ public class HpsChargeJob implements InitializingBean {
     	elePaymentDateManager.initializePymentDates();
     	chaobiaoManager.initializeChaobiaoRecords();
     	heatingMaintainManager.initializeChargeRecords();
-    	backupDbData();
+    	//backupDbData();
     }
 
     @Autowired
