@@ -335,6 +335,7 @@ public class ReportExportController extends BaseFormController {
         if (operId != null) {
             params.put("oper_id", operId);
         }
+        params.put("charge_state", ChargeStateEnum.CHARGED.ordinal() + "");
         File reportFile = null;
         try {
             reportFile = exportReportFile(REPORT_CONFIG_FILE_HEATING_MAINTAIN, params);
