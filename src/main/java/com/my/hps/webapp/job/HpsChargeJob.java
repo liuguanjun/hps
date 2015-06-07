@@ -2,6 +2,8 @@ package com.my.hps.webapp.job;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
 
 import org.appfuse.service.hps.HpsElectricChaobiaoManager;
@@ -31,6 +33,7 @@ public class HpsChargeJob implements InitializingBean {
     	elePaymentDateManager.initializePymentDates();
     	chaobiaoManager.initializeChaobiaoRecords();
     	heatingMaintainManager.initializeChargeRecords();
+    	backupDbData();
     }
 
     @Autowired
@@ -62,17 +65,18 @@ public class HpsChargeJob implements InitializingBean {
     @Override
 	public void afterPropertiesSet() throws Exception {
 		initChargeRecords();
-		backupDbData();
 	}
     
     private void backupDbData() {
         Properties prop = new Properties();   
         InputStream in = HpsChargeJob.class.getResourceAsStream("/hps_config.properites");
         String exeFileName = null;
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss");
+        String dataTimeStr = format.format(new Date());
         try {
             prop.load(in);   
             exeFileName = prop.getProperty("backup_exe_file_path").trim();
-            Runtime.getRuntime().exec(exeFileName);
+            Runtime.getRuntime().exec(exeFileName + " " + dataTimeStr);
         } catch (IOException e) {   
             e.printStackTrace();
             throw new RuntimeException(e);
