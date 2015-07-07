@@ -176,6 +176,10 @@ public class HpsHeatingMaintain2015ChargeManagerImpl extends GenericManagerImpl<
             // 还没有当前房屋的缴费记录，生成一个新的
             HpsHeatingMaintainChargeRecord2015 newChargeRecord = new HpsHeatingMaintainChargeRecord2015();
             HpsHeatingMaintainPaymentDate2015 paymentDate = getPaymentDateOfHouse(house);
+            if (paymentDate == null) {
+                // 
+                return;
+            }
             newChargeRecord.setPaymentDate(paymentDate);
             newChargeRecord.setHouse(house);
             newChargeRecord.setHouseOwner(house.getOwner());
@@ -200,7 +204,7 @@ public class HpsHeatingMaintain2015ChargeManagerImpl extends GenericManagerImpl<
                 return paymentDate;
             }
         }
-        throw new PaymentDateNotExistsException();
+        return null;
     }
     
     @Override
