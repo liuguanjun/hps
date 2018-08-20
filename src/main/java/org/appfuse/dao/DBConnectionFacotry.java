@@ -16,9 +16,10 @@ public enum DBConnectionFacotry {
 		{
 			//Change these settings according to your local configuration
 			String driver = "com.mysql.jdbc.Driver";
-			String connectString = "jdbc:mysql://localhost:3306/hps";
+			// mysql://localhost:3306/hps?serverTimezone=GMT%2B8&amp;useUnicode=true&amp;characterEncoding=utf-8
+			String connectString = "jdbc:mysql://localhost:3306/hps?serverTimezone=GMT%2B8";
 			String user = "root";
-			String password = "";
+			String password = "root";
 
 
 			Class.forName(driver);
